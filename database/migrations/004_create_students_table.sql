@@ -8,6 +8,7 @@ CREATE TABLE students (
     gender VARCHAR(20),
     date_of_birth DATE,
     grade_level VARCHAR(20),
+    site_id UUID NOT NULL REFERENCES sites(id) ON DELETE RESTRICT,
     status VARCHAR(50) DEFAULT 'active' CHECK (status IN ('active', 'inactive', 'graduated', 'transferred')),
     notes TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
@@ -18,6 +19,7 @@ CREATE TABLE students (
 CREATE INDEX idx_students_status ON students(status);
 CREATE INDEX idx_students_name ON students(last_name, first_name);
 CREATE INDEX idx_students_grade ON students(grade_level);
+CREATE INDEX idx_students_site_id ON students(site_id);
 
 -- Full-text search index for student names
 CREATE INDEX idx_students_name_fulltext ON students USING gin(to_tsvector('english', first_name || ' ' || last_name));

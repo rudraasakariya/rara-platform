@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Site } from './site.entity';
 
 @Entity('students')
 export class Student {
@@ -25,6 +28,13 @@ export class Student {
 
   @Column({ name: 'grade_level', nullable: true })
   gradeLevel: string;
+
+  @Column({ name: 'site_id', type: 'uuid' })
+  siteId: string;
+
+  @ManyToOne(() => Site, { onDelete: 'RESTRICT' })
+  @JoinColumn({ name: 'site_id' })
+  site: Site;
 
   @Column({
     type: 'varchar',
