@@ -1,0 +1,35 @@
+/**
+ * Message codes enum for type-safe message references
+ * Organized by domain/feature
+ */
+export enum MessageCode {
+  // ========== Validation Messages ==========
+  // Email validation
+  EMAIL_INVALID = 'EMAIL_INVALID',
+  EMAIL_REQUIRED = 'EMAIL_REQUIRED',
+  
+  // Password validation
+  PASSWORD_REQUIRED = 'PASSWORD_REQUIRED',
+  PASSWORD_MUST_BE_STRING = 'PASSWORD_MUST_BE_STRING',
+  PASSWORD_MIN_LENGTH = 'PASSWORD_MIN_LENGTH',
+  PASSWORD_MAX_LENGTH = 'PASSWORD_MAX_LENGTH',
+  
+  // Name validation
+  FIRST_NAME_REQUIRED = 'FIRST_NAME_REQUIRED',
+  FIRST_NAME_MUST_BE_STRING = 'FIRST_NAME_MUST_BE_STRING',
+  FIRST_NAME_MAX_LENGTH = 'FIRST_NAME_MAX_LENGTH',
+  LAST_NAME_REQUIRED = 'LAST_NAME_REQUIRED',
+  LAST_NAME_MUST_BE_STRING = 'LAST_NAME_MUST_BE_STRING',
+  LAST_NAME_MAX_LENGTH = 'LAST_NAME_MAX_LENGTH',
+  
+  // ========== Error Messages ==========
+  // Authentication errors
+  INVALID_CREDENTIALS = 'INVALID_CREDENTIALS',
+  USER_NOT_FOUND = 'USER_NOT_FOUND',
+  USER_ALREADY_EXISTS = 'USER_ALREADY_EXISTS',
+
+  // Authorization errors
+  ACCESS_DENIED = 'ACCESS_DENIED',
+  INSUFFICIENT_PERMISSIONS = 'INSUFFICIENT_PERMISSIONS',
+}
+
