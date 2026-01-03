@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToMany,
   JoinColumn,
 } from 'typeorm';
 import { Site } from './site.entity';
+import { StudentTutorAssignment } from './student-tutor-assignment.entity';
 
 @Entity('students')
 export class Student {
@@ -35,6 +37,9 @@ export class Student {
   @ManyToOne(() => Site, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'site_id' })
   site: Site;
+
+  @OneToMany(() => StudentTutorAssignment, assignment => assignment.student)
+  tutorAssignments: StudentTutorAssignment[];
 
   @Column({
     type: 'varchar',
