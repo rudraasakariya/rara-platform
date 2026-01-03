@@ -41,6 +41,13 @@ export const Messages: Record<MessageCode, string> = {
 
   // Site errors
   [MessageCode.SITE_NOT_FOUND]: 'Site not found',
+
+  // Tutor errors
+  [MessageCode.TUTOR_NOT_FOUND]: 'Tutor not found',
+  [MessageCode.TUTOR_ALREADY_EXISTS]: 'Tutor already exists',
+  [MessageCode.TUTOR_CREATION_FAILED]: 'Failed to create tutor',
+  [MessageCode.USER_NOT_TUTOR]: 'User is not a tutor',
+  [MessageCode.USER_ALREADY_TUTOR]: 'User is already assigned as a tutor',
 };
 
 /**

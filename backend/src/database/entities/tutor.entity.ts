@@ -5,9 +5,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
+  OneToMany,
   JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { StudentTutorAssignment } from './student-tutor-assignment.entity';
 
 @Entity('tutors')
 export class Tutor {
@@ -18,11 +20,14 @@ export class Tutor {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
+  @OneToMany(() => StudentTutorAssignment, assignment => assignment.tutor)
+  studentAssignments: StudentTutorAssignment[];
+
   @Column({ name: 'max_load', default: 10 })
   maxLoad: number;
 
   @Column({ name: 'hire_date', type: 'date', nullable: true })
-  hireDate: Date;
+  hireDate: Date | null;
 
   @Column({
     type: 'varchar',
