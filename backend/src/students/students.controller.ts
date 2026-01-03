@@ -45,6 +45,25 @@ export class StudentsController {
     return this.studentsService.getStudents(query, user);
   }
 
+  @Get('site/:siteId/students')
+  @ApiOperation({ summary: 'Get all students by site id' })
+  @ApiParam({ name: 'siteId', description: 'The id of the site' })
+  @ApiResponse({ status: 200, description: 'Students fetched successfully' })
+  @ApiBearerAuth()
+  async getStudentsBySiteId(@Param('siteId') siteId: string, @CurrentUser() user: User) {
+    return this.studentsService.getStudentsBySiteId(siteId, user);
+  }
+
+  @Get('site/:siteId/students/:studentId')
+  @ApiOperation({ summary: 'Get a student by site id and student id' })
+  @ApiParam({ name: 'siteId', description: 'The id of the site' })
+  @ApiParam({ name: 'studentId', description: 'The id of the student' })
+  @ApiResponse({ status: 200, description: 'Student fetched successfully' })
+  @ApiBearerAuth()
+  async getStudentBySiteIdAndStudentId(@Param('siteId') siteId: string, @Param('studentId') studentId: string, @CurrentUser() user: User) {
+    return this.studentsService.getStudentBySiteIdAndStudentId(siteId, studentId, user);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get a student by id' })
   @ApiParam({ name: 'id', description: 'The id of the student' })
@@ -81,24 +100,5 @@ export class StudentsController {
   @ApiBearerAuth()
   async deleteStudent(@Param('id') id: string) {
     return this.studentsService.deleteStudent(id);
-  }
-
-  @Get('site/:siteId/students')
-  @ApiOperation({ summary: 'Get all students by site id' })
-  @ApiParam({ name: 'siteId', description: 'The id of the site' })
-  @ApiResponse({ status: 200, description: 'Students fetched successfully' })
-  @ApiBearerAuth()
-  async getStudentsBySiteId(@Param('siteId') siteId: string, @CurrentUser() user: User) {
-    return this.studentsService.getStudentsBySiteId(siteId, user);
-  }
-
-  @Get('site/:siteId/students/:studentId')
-  @ApiOperation({ summary: 'Get a student by site id and student id' })
-  @ApiParam({ name: 'siteId', description: 'The id of the site' })
-  @ApiParam({ name: 'studentId', description: 'The id of the student' })
-  @ApiResponse({ status: 200, description: 'Student fetched successfully' })
-  @ApiBearerAuth()
-  async getStudentBySiteIdAndStudentId(@Param('siteId') siteId: string, @Param('studentId') studentId: string, @CurrentUser() user: User) {
-    return this.studentsService.getStudentBySiteIdAndStudentId(siteId, studentId, user);
   }
 }
