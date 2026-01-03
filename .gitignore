@@ -3,6 +3,10 @@ node_modules/
 .pnp
 .pnp.js
 
+# Root level package files (should only exist in backend/ and frontend/)
+/package.json
+/package-lock.json
+
 # Testing
 coverage/
 *.log
