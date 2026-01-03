@@ -33,6 +33,14 @@ export const Messages: Record<MessageCode, string> = {
   // Authorization errors
   [MessageCode.ACCESS_DENIED]: 'Access denied',
   [MessageCode.INSUFFICIENT_PERMISSIONS]: 'Insufficient permissions',
+
+  // Student errors
+  [MessageCode.STUDENT_NOT_FOUND]: 'Student not found',
+  [MessageCode.STUDENT_ALREADY_EXISTS]: 'Student already exists',
+  [MessageCode.STUDENT_CREATION_FAILED]: 'Failed to create student',
+
+  // Site errors
+  [MessageCode.SITE_NOT_FOUND]: 'Site not found',
 };
 
 /**
