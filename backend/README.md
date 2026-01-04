@@ -31,6 +31,40 @@
 $ npm install
 ```
 
+## Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```env
+# Server
+PORT=3000
+NODE_ENV=development
+
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+DB_DATABASE=rara_platform
+
+# JWT
+JWT_SECRET=your-secret-key-here
+
+# CORS Configuration
+FRONTEND_URL=http://localhost:3001
+# For production, use ALLOWED_ORIGINS (comma-separated):
+# ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+```
+
+### CORS Configuration
+
+The backend is configured to allow CORS requests from the frontend. 
+
+- **Development**: Automatically allows all `localhost` origins
+- **Production**: Use `ALLOWED_ORIGINS` environment variable (comma-separated list)
+- If `FRONTEND_URL` is set, it will be added to allowed origins
+- Credentials (cookies/auth headers) are enabled for authenticated requests
+
 ## Compile and run the project
 
 ```bash
