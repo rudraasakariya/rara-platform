@@ -24,7 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  // Ensure we're on the client before checking token
+  // Track when component has mounted on client to prevent hydration mismatch
   useEffect(() => {
     setIsMounted(true);
   }, []);
