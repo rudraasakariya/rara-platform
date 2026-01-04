@@ -20,11 +20,17 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  // Check if token exists on mount
-  const hasToken = typeof window !== 'undefined' && getToken() !== null;
+  // Ensure we're on the client before checking token
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Check if token exists on mount (only on client)
+  const hasToken = isMounted && getToken() !== null;
 
   // Fetch current user
   const {
@@ -103,9 +109,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     router.push('/login');
   }, [router, queryClient]);
 
+  // Ensure isLoading is false during SSR to prevent hydration mismatch
+  const isLoading = isMounted 
+    ? (isLoadingUser || loginMutation.isPending || registerMutation.isPending)
+    : false;
+
   const value: AuthContextType = {
     user,
-    isLoading: isLoadingUser || loginMutation.isPending || registerMutation.isPending,
+    isLoading,
     isAuthenticated: !!user,
     login,
     register,
