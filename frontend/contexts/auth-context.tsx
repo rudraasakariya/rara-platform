@@ -30,7 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Check if token exists on mount (only on client)
-  const hasToken = isMounted && getToken() !== null;
+  const hasToken = typeof window !== 'undefined' && getToken() !== null;
 
   // Fetch current user
   const {
