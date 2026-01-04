@@ -1,7 +1,30 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/contexts/auth-context';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from 'next/link';
 
 export default function Home() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push('/dashboard');
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <Card className="w-full max-w-2xl">
@@ -16,8 +39,12 @@ export default function Home() {
             The frontend is set up and ready for development. Start building your features!
           </p>
           <div className="flex gap-4">
-            <Button>Get Started</Button>
-            <Button variant="outline">Learn More</Button>
+            <Button asChild>
+              <Link href="/login">Get Started</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="/register">Sign Up</Link>
+            </Button>
           </div>
         </CardContent>
       </Card>
