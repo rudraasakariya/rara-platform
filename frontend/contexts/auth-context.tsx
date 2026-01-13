@@ -19,7 +19,13 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  // Initialize user from localStorage immediately to prevent redirect on refresh
+  const [user, setUser] = useState<User | null>(() => {
+    if (typeof window !== 'undefined') {
+      return getStoredUser();
+    }
+    return null;
+  });
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -32,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Check if token exists on mount (only on client)
   const hasToken = typeof window !== 'undefined' && getToken() !== null;
 
-  // Fetch current user
+  // Fetch current user - this will verify/refresh the stored user
   const {
     data: userData,
     isLoading: isLoadingUser,
@@ -41,8 +47,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   } = useQuery({
     queryKey: ['auth', 'me'],
     queryFn: authApi.getMe,
-    enabled: hasToken,
+    enabled: hasToken && isMounted, // Only fetch after mount
     retry: false,
+    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
   });
 
   // Update user state when data changes
@@ -50,19 +57,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (userData) {
       setUser(userData);
       storeUser(userData);
-    } else if (!hasToken) {
+    } else if (!hasToken && isMounted) {
+      // Only clear user if there's no token and we're mounted
       setUser(null);
     }
-  }, [userData, hasToken]);
+  }, [userData, hasToken, isMounted]);
 
-  // Handle auth errors
+  // Handle auth errors - only clear on actual authentication errors
   useEffect(() => {
-    if (userError) {
-      // Token is invalid, clear auth
-      clearAuth();
-      setUser(null);
+    if (userError && isMounted) {
+      // Check if it's an authentication error (401/403)
+      const isAuthError = 
+        (userError as any)?.response?.status === 401 ||
+        (userError as any)?.response?.status === 403;
+      
+      if (isAuthError) {
+        // Token is invalid, clear auth
+        clearAuth();
+        setUser(null);
+      }
+      // If it's not an auth error (network error, etc.), keep the stored user
     }
-  }, [userError]);
+  }, [userError, isMounted]);
 
   // Login mutation
   const loginMutation = useMutation({
@@ -114,10 +130,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     ? (isLoadingUser || loginMutation.isPending || registerMutation.isPending)
     : false;
 
+  // Check authentication status - user exists OR token exists (prevents redirect during refresh)
+  const isAuthenticated = !!user || (typeof window !== 'undefined' && getToken() !== null);
+
   const value: AuthContextType = {
     user,
     isLoading,
-    isAuthenticated: !!user,
+    isAuthenticated,
     login,
     register,
     logout,
