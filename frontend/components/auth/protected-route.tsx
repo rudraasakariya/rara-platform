@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
+import { pageStyles } from '@/styles';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export function ProtectedRoute({ children, requiredRole }: ProtectedRouteProps) 
   // Show loading state while checking authentication
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className={pageStyles.loadingContainer()}>
         <div className="text-muted-foreground">Loading...</div>
       </div>
     );

@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { pageStyles, formStyles } from '@/styles';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -61,10 +62,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Login</CardTitle>
+    <div className={pageStyles.authContainer()}>
+      <Card className={pageStyles.authCard()}>
+        <CardHeader className={pageStyles.authCardHeader()}>
+          <CardTitle className={pageStyles.authCardTitle()}>Login</CardTitle>
           <CardDescription>Enter your email and password to access your account</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +75,7 @@ export default function LoginPage() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <div className="space-y-2">
+            <div className={formStyles.fieldContainer()}>
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -84,10 +85,10 @@ export default function LoginPage() {
                 disabled={isLoading}
               />
               {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
+                <p className={formStyles.errorMessage()}>{errors.email.message}</p>
               )}
             </div>
-            <div className="space-y-2">
+            <div className={formStyles.fieldContainer()}>
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
@@ -97,17 +98,17 @@ export default function LoginPage() {
                 disabled={isLoading}
               />
               {errors.password && (
-                <p className="text-sm text-destructive">{errors.password.message}</p>
+                <p className={formStyles.errorMessage()}>{errors.password.message}</p>
               )}
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
+          <CardFooter className={formStyles.formFooter()}>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
-            <div className="text-sm text-center text-muted-foreground">
+            <div className={formStyles.formFooterLink()}>
               Don't have an account?{' '}
-              <Link href="/register" className="text-primary hover:underline">
+              <Link href="/register" className={formStyles.formFooterPrimaryLink()}>
                 Sign up
               </Link>
             </div>
