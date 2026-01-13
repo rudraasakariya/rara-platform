@@ -12,28 +12,24 @@ interface SidebarContextType {
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  // Initialize from localStorage synchronously on client, but default to false for SSR
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedState = localStorage.getItem('sidebar-open');
-      return savedState === 'true';
-    }
-    return false; // Default for SSR
-  });
+  // Always default to closed (false) - sidebar should be closed by default
+  const [isOpen, setIsOpen] = useState(false);
   
   const [isMounted, setIsMounted] = useState(false);
 
   // Track when component has mounted to prevent hydration mismatch
   useEffect(() => {
     setIsMounted(true);
-    // Sync with localStorage after mount
+    // Only read from localStorage after mount, but default to closed
+    // This ensures sidebar starts closed on every page load
     const savedState = localStorage.getItem('sidebar-open');
-    if (savedState !== null) {
-      setIsOpen(savedState === 'true');
+    // Only restore if explicitly saved as 'true', otherwise keep closed
+    if (savedState === 'true') {
+      setIsOpen(true);
     }
   }, []);
 
-  // Save sidebar state to localStorage (only after mount)
+  // Save sidebar state to localStorage (only after mount and user interaction)
   useEffect(() => {
     if (isMounted) {
       localStorage.setItem('sidebar-open', String(isOpen));
