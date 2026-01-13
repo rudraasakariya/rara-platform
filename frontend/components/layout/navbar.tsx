@@ -21,21 +21,6 @@ import {
   LogOut,
 } from 'lucide-react';
 
-// Tab navigation items based on role
-const adminTabs = [
-  { value: 'overview', label: 'Overview', href: '/dashboard' },
-  { value: 'structure', label: 'Structure', href: '/dashboard/structure' },
-  { value: 'sites', label: 'Sites', href: '/sites' },
-  { value: 'partners', label: 'Partners', href: '/partners' },
-];
-
-const tutorTabs = [
-  { value: 'overview', label: 'Overview', href: '/dashboard' },
-  { value: 'my-students', label: 'My Students', href: '/my-students' },
-  { value: 'my-sessions', label: 'My Sessions', href: '/my-sessions' },
-  { value: 'availability', label: 'Availability', href: '/availability' },
-];
-
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
@@ -49,30 +34,6 @@ export function Navbar() {
 
   const userRole = user?.role || 'tutor';
   const isAdmin = userRole === 'admin' || userRole === 'super_admin';
-  const tabs = isAdmin ? adminTabs : tutorTabs;
-
-  // Determine active tab based on current pathname
-  const getActiveTab = () => {
-    if (pathname === '/dashboard' || pathname.startsWith('/dashboard/')) {
-      if (pathname === '/dashboard/structure') return 'structure';
-      return 'overview';
-    }
-    if (pathname.startsWith('/sites')) return 'sites';
-    if (pathname.startsWith('/partners')) return 'partners';
-    if (pathname.startsWith('/my-students')) return 'my-students';
-    if (pathname.startsWith('/my-sessions')) return 'my-sessions';
-    if (pathname.startsWith('/availability')) return 'availability';
-    return 'overview';
-  };
-
-  const activeTab = getActiveTab();
-
-  const handleTabChange = (value: string) => {
-    const tab = tabs.find((t) => t.value === value);
-    if (tab) {
-      router.push(tab.href);
-    }
-  };
 
   const handleLogout = () => {
     logout();
@@ -174,28 +135,6 @@ export function Navbar() {
                       </Link>
                     </div>
                   )}
-                  <div>
-                    <h2 className="text-lg font-semibold mb-2">Navigation</h2>
-                    <div className="space-y-2">
-                      {tabs.map((tab) => {
-                        const isActive = activeTab === tab.value;
-                        return (
-                          <Link
-                            key={tab.value}
-                            href={tab.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                              isActive
-                                ? 'bg-primary text-primary-foreground'
-                                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
-                            }`}
-                          >
-                            {tab.label}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
                   <div className="border-t pt-4">
                     <div className="px-3 py-2">
                       <p className="text-sm font-medium">{getUserDisplayName()}</p>
@@ -233,34 +172,6 @@ export function Navbar() {
                 </div>
               </SheetContent>
             </Sheet>
-          </div>
-        </div>
-
-        {/* Tab Navigation - Matching Design */}
-        <div className="border-t border-gray-200">
-          <div className="flex items-center -mb-px">
-            {tabs.map((tab) => {
-              const isActive = activeTab === tab.value;
-              return (
-                <button
-                  key={tab.value}
-                  onClick={() => handleTabChange(tab.value)}
-                  className={`
-                    px-6 py-3 text-sm font-medium transition-colors relative
-                    ${
-                      isActive
-                        ? 'text-gray-900 font-semibold'
-                        : 'text-gray-600 hover:text-gray-900'
-                    }
-                  `}
-                >
-                  {tab.label}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gray-900" />
-                  )}
-                </button>
-              );
-            })}
           </div>
         </div>
       </div>
