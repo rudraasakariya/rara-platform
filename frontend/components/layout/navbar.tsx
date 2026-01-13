@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
+import { SidebarContent } from './sidebar-content';
 import {
   Menu,
   User,
@@ -114,61 +115,18 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Sidebar Menu Button */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden h-9 w-9">
+                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9">
                   <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle menu</span>
+                  <span className="sr-only">Toggle sidebar menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                <div className="flex flex-col gap-4 mt-8">
-                  {isAdmin && (
-                    <div className="pb-4 border-b">
-                      <Link
-                        href="/multi-site"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block px-3 py-2 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-50 text-center"
-                      >
-                        Multi-Site Operations
-                      </Link>
-                    </div>
-                  )}
-                  <div className="border-t pt-4">
-                    <div className="px-3 py-2">
-                      <p className="text-sm font-medium">{getUserDisplayName()}</p>
-                      <p className="text-xs text-muted-foreground">{user?.email}</p>
-                    </div>
-                    <div className="mt-2 space-y-1">
-                      <Link
-                        href="/profile"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-accent"
-                      >
-                        <User className="h-4 w-4" />
-                        <span>Profile</span>
-                      </Link>
-                      <Link
-                        href="/settings"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md text-sm hover:bg-accent"
-                      >
-                        <Settings className="h-4 w-4" />
-                        <span>Settings</span>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          handleLogout();
-                        }}
-                        className="flex items-center gap-2 px-3 py-2 rounded-md text-sm text-destructive hover:bg-accent w-full text-left"
-                      >
-                        <LogOut className="h-4 w-4" />
-                        <span>Logout</span>
-                      </button>
-                    </div>
-                  </div>
+              <SheetContent side="left" className="w-64 p-0">
+                <div className="flex flex-col h-full bg-white">
+                  {/* Mobile Sidebar Content - matches desktop sidebar styling */}
+                  <SidebarContent onNavigate={() => setMobileMenuOpen(false)} />
                 </div>
               </SheetContent>
             </Sheet>
