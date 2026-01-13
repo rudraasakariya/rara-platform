@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
@@ -27,11 +27,17 @@ import {
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout, isAuthenticated } = useAuth();
-  const { toggle } = useSidebar();
+  const { user, logout, isAuthenticated, isLoading } = useAuth();
+  const { isOpen, toggle } = useSidebar();
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Don't show navbar on login/register pages
-  if (!isAuthenticated || pathname === '/login' || pathname === '/register') {
+  // Track when component has mounted to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Don't show navbar on login/register pages or while loading
+  if (!isMounted || isLoading || !isAuthenticated || pathname === '/login' || pathname === '/register') {
     return null;
   }
 
@@ -49,8 +55,6 @@ export function Navbar() {
     }
     return user?.email || 'User';
   };
-
-  const { isOpen } = useSidebar();
 
   return (
     <>
