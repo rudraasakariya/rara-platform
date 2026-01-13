@@ -57,3 +57,31 @@
     @apply bg-gray-50 text-foreground;
   }
 }
+
+@layer components {
+  /* Layout patterns */
+  .container-max {
+    @apply max-w-content mx-auto;
+  }
+  
+  .page-container {
+    @apply max-w-content mx-auto px-8 py-8;
+  }
+  
+  .content-wrapper {
+    @apply flex-1 flex flex-col min-h-screen;
+  }
+  
+  /* Navigation patterns */
+  .nav-item-base {
+    @apply flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors;
+  }
+  
+  .nav-item-active {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  
+  .nav-item-inactive {
+    @apply text-gray-700 hover:bg-gray-100 hover:text-gray-900;
+  }
+}

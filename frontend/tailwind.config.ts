@@ -49,6 +49,20 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      spacing: {
+        // Custom spacing values from tokens
+        'sidebar': '256px', // SIDEBAR_WIDTH
+        'navbar': '73px', // NAVBAR_HEIGHT
+        'hamburger-top': '18px', // HAMBURGER_TOP
+      },
+      maxWidth: {
+        'content': '1920px', // MAX_CONTENT_WIDTH
+      },
+      zIndex: {
+        'navbar': '50',
+        'sidebar': '60',
+        'hamburger': '70',
+      },
     },
   },
   plugins: [],
