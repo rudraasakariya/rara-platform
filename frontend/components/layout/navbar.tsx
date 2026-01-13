@@ -57,39 +57,37 @@ export function Navbar() {
   };
 
   return (
-    <>
-      {/* Hamburger/Close Menu Button - Positioned relative to sidebar state */}
-      <Button 
-        variant="ghost" 
-        size="icon" 
-        className={cn(
-          'fixed z-hamburger h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 ease-in-out',
-          isOpen ? 'left-[260px] top-4' : 'left-4 top-4'
-        )}
-        onClick={toggle}
-      >
-        {isOpen ? (
-          <X className="h-5 w-5" />
-        ) : (
-          <Menu className="h-5 w-5" />
-        )}
-        <span className="sr-only">{isOpen ? 'Close sidebar menu' : 'Open sidebar menu'}</span>
-      </Button>
-
-      <nav className={navbarStyles.container()}>
-        <div className={navbarStyles.innerContainer()}>
-          {/* Header Section with Title and Subtitle */}
-          <div className={navbarStyles.headerSection()}>
-            <div className={navbarStyles.titleSection()}>
-              <div>
-                <h1 className={navbarStyles.heading()}>
-                  Tutoring Program Dashboard
-                </h1>
-                <p className={navbarStyles.subtitle()}>
-                  K-12 Math, ELA & SEL Services
-                </p>
-              </div>
+    <nav className={navbarStyles.container()}>
+      <div className={navbarStyles.innerContainer()}>
+        {/* Header Section with Title and Subtitle */}
+        <div className={navbarStyles.headerSection()}>
+          {/* Left side: Hamburger button and title */}
+          <div className="flex items-center gap-4">
+            {/* Hamburger/Close Menu Button */}
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-9 w-9 hover:bg-gray-100"
+              onClick={toggle}
+            >
+              {isOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+              <span className="sr-only">{isOpen ? 'Close sidebar menu' : 'Open sidebar menu'}</span>
+            </Button>
+            
+            {/* Title Section */}
+            <div>
+              <h1 className={navbarStyles.heading()}>
+                Tutoring Program Dashboard
+              </h1>
+              <p className={navbarStyles.subtitle()}>
+                K-12 Math, ELA & SEL Services
+              </p>
             </div>
+          </div>
 
           {/* Right Side Actions */}
           <div className={navbarStyles.actions()}>
@@ -147,6 +145,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-    </>
   );
 }

@@ -19,11 +19,6 @@ export const navbarStyles = {
     return 'flex items-center justify-between py-5';
   },
   
-  // Title section
-  titleSection: () => {
-    return 'flex items-center pl-12';
-  },
-  
   // Heading (h1)
   heading: () => {
     return 'text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight';
