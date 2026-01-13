@@ -9,7 +9,7 @@ function DashboardContent() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="container mx-auto p-8">
+    <div>
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-3xl font-bold">Dashboard</h1>
