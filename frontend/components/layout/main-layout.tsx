@@ -16,19 +16,14 @@ export function MainLayout({ children }: MainLayoutProps) {
   const { isOpen } = useSidebar();
 
   return (
-    <div className="flex min-h-screen bg-gray-50 relative">
-      {/* Sidebar - fixed on left, slides in/out */}
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Sidebar - always visible on desktop (md+), toggleable overlay on mobile */}
       <aside className={sidebarStyles.container(isOpen)}>
         <Sidebar />
       </aside>
 
-      {/* Main content area - shifts right when sidebar opens */}
-      <div
-        className={cn(
-          'flex flex-col flex-1 min-h-screen w-full transition-all duration-300 ease-in-out',
-          isOpen ? 'ml-64' : 'ml-0'
-        )}
-      >
+      {/* Main content area - full width on mobile, with sidebar on desktop */}
+      <div className="flex flex-col flex-1 min-h-screen w-full md:w-auto">
         {/* Navbar - sticky at top of content area */}
         <Navbar />
 

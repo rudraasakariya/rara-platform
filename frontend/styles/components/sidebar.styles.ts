@@ -4,14 +4,20 @@
  */
 
 export const sidebarStyles = {
-  // Sidebar container - fixed on left, full height
+  // Sidebar container
+  // On desktop (md+): part of flex layout, always visible
+  // On mobile: fixed overlay, slides in/out
   container: (isOpen: boolean) => {
-    const base = 'fixed left-0 top-0 z-sidebar h-screen w-64 border-r border-gray-200 bg-white transition-all duration-300 ease-in-out';
-    // When closed, hide completely off-screen to the left
-    const state = isOpen ? 'translate-x-0' : '-translate-x-full';
-    // Add pointer-events-none when closed to prevent interaction
-    const pointerEvents = isOpen ? '' : 'pointer-events-none';
-    return `${base} ${state} ${pointerEvents}`;
+    const base = 'h-screen w-64 border-r border-gray-200 bg-white transition-all duration-300 ease-in-out';
+    // Desktop: part of flex layout (not fixed)
+    // Mobile: fixed overlay that slides in/out
+    const positioning = 'md:relative fixed left-0 top-0 z-sidebar md:z-auto';
+    // On mobile: slide in/out based on isOpen
+    // On desktop: always visible (translate-x-0)
+    const state = isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0';
+    // Prevent interaction when closed on mobile
+    const pointerEvents = isOpen ? '' : 'pointer-events-none md:pointer-events-auto';
+    return `${base} ${positioning} ${state} ${pointerEvents}`;
   },
   
   // Navigation container
