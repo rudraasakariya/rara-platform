@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
+import { useSidebar } from '@/contexts/sidebar-context';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
-import { SidebarContent } from './sidebar-content';
+import { cn } from '@/lib/utils';
 import {
   Menu,
+  X,
   User,
   Settings,
   LogOut,
@@ -26,7 +27,7 @@ export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, logout, isAuthenticated } = useAuth();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { toggle } = useSidebar();
 
   // Don't show navbar on login/register pages
   if (!isAuthenticated || pathname === '/login' || pathname === '/register') {
@@ -48,38 +49,44 @@ export function Navbar() {
     return user?.email || 'User';
   };
 
-  return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-[1920px] mx-auto px-8">
-        {/* Header Section with Title and Subtitle */}
-        <div className="flex items-center justify-between py-5">
-          <div className="flex items-center gap-4">
-            {/* Hamburger Menu Button - Always visible on left */}
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-9 w-9">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle sidebar menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64 p-0">
-                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                <div className="flex flex-col h-full bg-white">
-                  {/* Sidebar Content - matches desktop sidebar styling */}
-                  <SidebarContent onNavigate={() => setMobileMenuOpen(false)} />
-                </div>
-              </SheetContent>
-            </Sheet>
+  const { isOpen } = useSidebar();
 
-            <div>
-              <h1 className="text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight">
-                Tutoring Program Dashboard
-              </h1>
-              <p className="text-sm text-gray-500 mt-1 font-normal">
-                K-12 Math, ELA & SEL Services
-              </p>
+  return (
+    <>
+      {/* Hamburger/Close Menu Button - Fixed on left, always visible */}
+      <Button 
+        variant="ghost" 
+        size="icon" 
+        className="fixed left-4 top-[18px] z-[60] h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50" 
+        onClick={toggle}
+      >
+        {isOpen ? (
+          <X className="h-5 w-5" />
+        ) : (
+          <Menu className="h-5 w-5" />
+        )}
+        <span className="sr-only">{isOpen ? 'Close sidebar menu' : 'Open sidebar menu'}</span>
+      </Button>
+
+      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div
+          className={cn(
+            'max-w-[1920px] mx-auto px-8 transition-all duration-300 ease-in-out',
+            isOpen ? 'ml-64' : 'ml-0'
+          )}
+        >
+          {/* Header Section with Title and Subtitle */}
+          <div className="flex items-center justify-between py-5">
+            <div className="flex items-center">
+              <div className="ml-12">
+                <h1 className="text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight">
+                  Tutoring Program Dashboard
+                </h1>
+                <p className="text-sm text-gray-500 mt-1 font-normal">
+                  K-12 Math, ELA & SEL Services
+                </p>
+              </div>
             </div>
-          </div>
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-4">
@@ -137,5 +144,6 @@ export function Navbar() {
         </div>
       </div>
     </nav>
+    </>
   );
 }

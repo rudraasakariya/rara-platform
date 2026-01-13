@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "@/providers/query-provider";
 import { AuthProvider } from "@/contexts/auth-context";
+import { SidebarProvider } from "@/contexts/sidebar-context";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/layout/navbar";
 import { LayoutWrapper } from "@/components/layout/layout-wrapper";
@@ -34,11 +35,13 @@ export default function RootLayout({
       >
         <QueryProvider>
           <AuthProvider>
-            <Navbar />
-            <LayoutWrapper>
-              {children}
-            </LayoutWrapper>
-            <Toaster />
+            <SidebarProvider>
+              <Navbar />
+              <LayoutWrapper>
+                {children}
+              </LayoutWrapper>
+              <Toaster />
+            </SidebarProvider>
           </AuthProvider>
         </QueryProvider>
       </body>

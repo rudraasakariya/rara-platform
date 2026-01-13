@@ -29,11 +29,10 @@ const tutorNavItems = [
 ];
 
 interface SidebarContentProps {
-  isCollapsed?: boolean;
   onNavigate?: () => void;
 }
 
-export function SidebarContent({ isCollapsed = false, onNavigate }: SidebarContentProps) {
+export function SidebarContent({ onNavigate }: SidebarContentProps) {
   const pathname = usePathname();
   const { user } = useAuth();
 
@@ -83,10 +82,9 @@ export function SidebarContent({ isCollapsed = false, onNavigate }: SidebarConte
                   ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                   : 'text-gray-700 hover:text-gray-900'
               )}
-              title={isCollapsed ? item.label : undefined}
             >
-              <Icon className={cn('h-5 w-5 flex-shrink-0', isCollapsed && 'mx-auto')} />
-              {!isCollapsed && <span>{item.label}</span>}
+              <Icon className="h-5 w-5 flex-shrink-0" />
+              <span>{item.label}</span>
             </Link>
           );
         })}
@@ -102,10 +100,9 @@ export function SidebarContent({ isCollapsed = false, onNavigate }: SidebarConte
             'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
             pathname === '/profile' && 'bg-gray-100'
           )}
-          title={isCollapsed ? 'Profile' : undefined}
         >
-          <User className={cn('h-5 w-5 flex-shrink-0', isCollapsed && 'mx-auto')} />
-          {!isCollapsed && <span>Profile</span>}
+          <User className="h-5 w-5 flex-shrink-0" />
+          <span>Profile</span>
         </Link>
         <Link
           href="/settings"
@@ -115,10 +112,9 @@ export function SidebarContent({ isCollapsed = false, onNavigate }: SidebarConte
             'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
             pathname === '/settings' && 'bg-gray-100'
           )}
-          title={isCollapsed ? 'Settings' : undefined}
         >
-          <Settings className={cn('h-5 w-5 flex-shrink-0', isCollapsed && 'mx-auto')} />
-          {!isCollapsed && <span>Settings</span>}
+          <Settings className="h-5 w-5 flex-shrink-0" />
+          <span>Settings</span>
         </Link>
       </div>
     </>
