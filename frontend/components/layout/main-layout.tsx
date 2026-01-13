@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { useSidebar } from '@/contexts/sidebar-context';
 import { Sidebar } from './sidebar';
+import { Breadcrumbs } from './breadcrumbs';
 import { cn } from '@/lib/utils';
 
 interface MainLayoutProps {
@@ -36,6 +37,10 @@ export function MainLayout({ children }: MainLayoutProps) {
       >
         <div className="flex-1">
           <div className="max-w-[1920px] mx-auto px-8 py-8">
+            {/* Breadcrumbs Navigation */}
+            <div className="mb-6">
+              <Breadcrumbs />
+            </div>
             {children}
           </div>
         </div>
