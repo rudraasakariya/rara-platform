@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/layout/navbar";
 import { LayoutWrapper } from "@/components/layout/layout-wrapper";
+import { ErrorBoundaryWrapper } from "@/components/layout/error-boundary-wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,13 +34,15 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          <AuthProvider>
-            <Navbar />
-            <LayoutWrapper>
-              {children}
-            </LayoutWrapper>
-            <Toaster />
-          </AuthProvider>
+          <ErrorBoundaryWrapper>
+            <AuthProvider>
+              <Navbar />
+              <LayoutWrapper>
+                {children}
+              </LayoutWrapper>
+              <Toaster />
+            </AuthProvider>
+          </ErrorBoundaryWrapper>
         </QueryProvider>
       </body>
     </html>
