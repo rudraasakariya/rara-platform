@@ -53,11 +53,11 @@ export function Navbar() {
 
   return (
     <>
-      {/* Hamburger/Close Menu Button - Fixed on left, always visible */}
+      {/* Hamburger/Close Menu Button - Fixed on left, always stays in place */}
       <Button 
         variant="ghost" 
         size="icon" 
-        className="fixed left-4 top-[18px] z-[60] h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50" 
+        className="fixed left-4 top-[18px] z-[70] h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50"
         onClick={toggle}
       >
         {isOpen ? (
@@ -68,17 +68,17 @@ export function Navbar() {
         <span className="sr-only">{isOpen ? 'Close sidebar menu' : 'Open sidebar menu'}</span>
       </Button>
 
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <div
-          className={cn(
-            'max-w-[1920px] mx-auto px-8 transition-all duration-300 ease-in-out',
-            isOpen ? 'ml-64' : 'ml-0'
-          )}
-        >
+      <nav 
+        className={cn(
+          'bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm transition-all duration-300 ease-in-out',
+          isOpen ? 'ml-64' : 'ml-0'
+        )}
+      >
+        <div className="max-w-[1920px] mx-auto px-8">
           {/* Header Section with Title and Subtitle */}
           <div className="flex items-center justify-between py-5">
-            <div className="flex items-center">
-              <div className="ml-12">
+            <div className="flex items-center pl-12">
+              <div>
                 <h1 className="text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight">
                   Tutoring Program Dashboard
                 </h1>
