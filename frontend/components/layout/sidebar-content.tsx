@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
 import { cn } from '@/lib/utils';
+import { navigationItemVariants } from '@/styles';
 import {
   LayoutDashboard,
   Building2,
@@ -76,11 +77,9 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
               href={item.href}
               onClick={handleClick}
               className={cn(
-                'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
-                'hover:bg-gray-100',
-                isActive
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  : 'text-gray-700 hover:text-gray-900'
+                navigationItemVariants({
+                  variant: isActive ? 'active' : 'inactive',
+                })
               )}
             >
               <Icon className="h-5 w-5 flex-shrink-0" />
@@ -96,9 +95,9 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
           href="/profile"
           onClick={handleClick}
           className={cn(
-            'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
-            'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
-            pathname === '/profile' && 'bg-gray-100'
+            navigationItemVariants({
+              variant: pathname === '/profile' ? 'active' : 'inactive',
+            })
           )}
         >
           <User className="h-5 w-5 flex-shrink-0" />
@@ -108,9 +107,9 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
           href="/settings"
           onClick={handleClick}
           className={cn(
-            'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
-            'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
-            pathname === '/settings' && 'bg-gray-100'
+            navigationItemVariants({
+              variant: pathname === '/settings' ? 'active' : 'inactive',
+            })
           )}
         >
           <Settings className="h-5 w-5 flex-shrink-0" />

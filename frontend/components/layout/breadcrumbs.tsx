@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { breadcrumbsStyles } from '@/styles';
 
 interface BreadcrumbItem {
   label: string;
@@ -81,36 +82,36 @@ export function Breadcrumbs({ className, maxItems }: BreadcrumbsProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={cn('flex items-center space-x-2 text-sm text-gray-600', className)}
+      className={cn(breadcrumbsStyles.container(), className)}
     >
-      <ol className="flex items-center space-x-2">
+      <ol className={breadcrumbsStyles.list()}>
         {displayBreadcrumbs.map((breadcrumb, index) => {
           const isLast = index === displayBreadcrumbs.length - 1;
           const isEllipsis = breadcrumb.label === '...';
 
           return (
-            <li key={`${breadcrumb.href}-${index}`} className="flex items-center">
+            <li key={`${breadcrumb.href}-${index}`} className={breadcrumbsStyles.item()}>
               {index === 0 ? (
                 <Link
                   href={breadcrumb.href}
-                  className="flex items-center hover:text-gray-900 transition-colors"
+                  className={breadcrumbsStyles.homeLink()}
                 >
                   <Home className="h-4 w-4" />
                   <span className="sr-only">{breadcrumb.label}</span>
                 </Link>
               ) : (
                 <>
-                  <ChevronRight className="h-4 w-4 text-gray-400 mx-2" />
+                  <ChevronRight className={breadcrumbsStyles.separator()} />
                   {isLast ? (
-                    <span className="font-medium text-gray-900" aria-current="page">
+                    <span className={breadcrumbsStyles.active()} aria-current="page">
                       {breadcrumb.label}
                     </span>
                   ) : isEllipsis ? (
-                    <span className="text-gray-400">...</span>
+                    <span className={breadcrumbsStyles.ellipsis()}>...</span>
                   ) : (
                     <Link
                       href={breadcrumb.href}
-                      className="hover:text-gray-900 transition-colors"
+                      className={breadcrumbsStyles.link()}
                     >
                       {breadcrumb.label}
                     </Link>

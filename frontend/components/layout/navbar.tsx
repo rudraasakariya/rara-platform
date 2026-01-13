@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { navbarStyles } from '@/styles';
 import {
   Menu,
   X,
@@ -57,7 +58,7 @@ export function Navbar() {
       <Button 
         variant="ghost" 
         size="icon" 
-        className="fixed left-4 top-[18px] z-[70] h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50"
+        className={navbarStyles.hamburgerButton()}
         onClick={toggle}
       >
         {isOpen ? (
@@ -68,28 +69,23 @@ export function Navbar() {
         <span className="sr-only">{isOpen ? 'Close sidebar menu' : 'Open sidebar menu'}</span>
       </Button>
 
-      <nav 
-        className={cn(
-          'bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm transition-all duration-300 ease-in-out',
-          isOpen ? 'ml-64' : 'ml-0'
-        )}
-      >
-        <div className="max-w-[1920px] mx-auto px-8">
+      <nav className={navbarStyles.container(isOpen)}>
+        <div className={navbarStyles.innerContainer()}>
           {/* Header Section with Title and Subtitle */}
-          <div className="flex items-center justify-between py-5">
-            <div className="flex items-center pl-12">
+          <div className={navbarStyles.headerSection()}>
+            <div className={navbarStyles.titleSection()}>
               <div>
-                <h1 className="text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight">
+                <h1 className={navbarStyles.heading()}>
                   Tutoring Program Dashboard
                 </h1>
-                <p className="text-sm text-gray-500 mt-1 font-normal">
+                <p className={navbarStyles.subtitle()}>
                   K-12 Math, ELA & SEL Services
                 </p>
               </div>
             </div>
 
           {/* Right Side Actions */}
-          <div className="flex items-center gap-4">
+          <div className={navbarStyles.actions()}>
             {/* Multi-Site Operations Button - Only show for admin/super_admin */}
             {isAdmin && (
               <Button
