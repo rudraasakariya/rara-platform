@@ -3,6 +3,7 @@
 import { ReactNode } from 'react';
 import { useSidebar } from '@/contexts/sidebar-context';
 import { Sidebar } from './sidebar';
+import { Navbar } from './navbar';
 import { Breadcrumbs } from './breadcrumbs';
 import { cn } from '@/lib/utils';
 import { sidebarStyles, layoutPatterns } from '@/styles';
@@ -16,21 +17,23 @@ export function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar - slides in from left and pushes content */}
+      {/* Sidebar - fixed on left, slides in/out */}
       <aside className={sidebarStyles.container(isOpen)}>
-        <div className={sidebarStyles.innerContainer()}>
-          <Sidebar />
-        </div>
+        <Sidebar />
       </aside>
 
-      {/* Main content area - shifts to the right when sidebar opens */}
-      <main
+      {/* Main content area - includes navbar and page content */}
+      <div
         className={cn(
-          layoutPatterns.mainContent,
+          'flex flex-col flex-1 min-h-screen transition-all duration-300 ease-in-out',
           isOpen ? 'ml-64' : 'ml-0'
         )}
       >
-        <div className="flex-1">
+        {/* Navbar - fixed at top */}
+        <Navbar />
+
+        {/* Page content area */}
+        <main className="flex-1 overflow-y-auto">
           <div className={layoutPatterns.pageContainer}>
             {/* Breadcrumbs Navigation */}
             <div className="mb-6">
@@ -38,8 +41,8 @@ export function MainLayout({ children }: MainLayoutProps) {
             </div>
             {children}
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

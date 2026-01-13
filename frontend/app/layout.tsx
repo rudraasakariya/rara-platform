@@ -38,7 +38,6 @@ export default function RootLayout({
           <ErrorBoundaryWrapper>
             <AuthProvider>
               <SidebarProvider>
-                <Navbar />
                 <LayoutWrapper>
                   {children}
                 </LayoutWrapper>

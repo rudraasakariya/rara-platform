@@ -58,11 +58,14 @@ export function Navbar() {
 
   return (
     <>
-      {/* Hamburger/Close Menu Button - Fixed on left, always stays in place */}
+      {/* Hamburger/Close Menu Button - Positioned relative to sidebar state */}
       <Button 
         variant="ghost" 
         size="icon" 
-        className={navbarStyles.hamburgerButton()}
+        className={cn(
+          'fixed z-hamburger h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50 transition-all duration-300 ease-in-out',
+          isOpen ? 'left-[260px] top-4' : 'left-4 top-4'
+        )}
         onClick={toggle}
       >
         {isOpen ? (
@@ -73,7 +76,7 @@ export function Navbar() {
         <span className="sr-only">{isOpen ? 'Close sidebar menu' : 'Open sidebar menu'}</span>
       </Button>
 
-      <nav className={navbarStyles.container(isOpen)}>
+      <nav className={navbarStyles.container()}>
         <div className={navbarStyles.innerContainer()}>
           {/* Header Section with Title and Subtitle */}
           <div className={navbarStyles.headerSection()}>

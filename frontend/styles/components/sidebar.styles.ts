@@ -4,17 +4,11 @@
  */
 
 export const sidebarStyles = {
-  // Sidebar container
+  // Sidebar container - fixed on left, full height
   container: (isOpen: boolean) => {
-    const base = 'fixed left-0 top-0 z-sidebar h-screen border-r border-gray-200 bg-white transition-all duration-300 ease-in-out';
+    const base = 'fixed left-0 top-0 z-sidebar h-screen w-64 border-r border-gray-200 bg-white transition-all duration-300 ease-in-out';
     const state = isOpen ? 'translate-x-0' : '-translate-x-full';
-    const width = 'w-64';
-    return `${base} ${state} ${width}`;
-  },
-  
-  // Sidebar inner container
-  innerContainer: () => {
-    return 'pt-[73px] h-full';
+    return `${base} ${state}`;
   },
   
   // Navigation container
