@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { SidebarContent } from './sidebar-content';
 import {
@@ -53,13 +53,32 @@ export function Navbar() {
       <div className="max-w-[1920px] mx-auto px-8">
         {/* Header Section with Title and Subtitle */}
         <div className="flex items-center justify-between py-5">
-          <div>
-            <h1 className="text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight">
-              Tutoring Program Dashboard
-            </h1>
-            <p className="text-sm text-gray-500 mt-1 font-normal">
-              K-12 Math, ELA & SEL Services
-            </p>
+          <div className="flex items-center gap-4">
+            {/* Hamburger Menu Button - Always visible on left */}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-9 w-9">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle sidebar menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-64 p-0">
+                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                <div className="flex flex-col h-full bg-white">
+                  {/* Sidebar Content - matches desktop sidebar styling */}
+                  <SidebarContent onNavigate={() => setMobileMenuOpen(false)} />
+                </div>
+              </SheetContent>
+            </Sheet>
+
+            <div>
+              <h1 className="text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight">
+                Tutoring Program Dashboard
+              </h1>
+              <p className="text-sm text-gray-500 mt-1 font-normal">
+                K-12 Math, ELA & SEL Services
+              </p>
+            </div>
           </div>
 
           {/* Right Side Actions */}
@@ -114,22 +133,6 @@ export function Navbar() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            {/* Mobile Sidebar Menu Button */}
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9">
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle sidebar menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-64 p-0">
-                <div className="flex flex-col h-full bg-white">
-                  {/* Mobile Sidebar Content - matches desktop sidebar styling */}
-                  <SidebarContent onNavigate={() => setMobileMenuOpen(false)} />
-                </div>
-              </SheetContent>
-            </Sheet>
           </div>
         </div>
       </div>
