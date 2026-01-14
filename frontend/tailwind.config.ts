@@ -52,7 +52,7 @@ const config: Config = {
       spacing: {
         // Custom spacing values from tokens
         'sidebar': '256px', // SIDEBAR_WIDTH
-        'navbar': '120px', // NAVBAR_HEIGHT
+        'navbar': '60px', // NAVBAR_HEIGHT
         'hamburger-top': '18px', // HAMBURGER_TOP
       },
       maxWidth: {

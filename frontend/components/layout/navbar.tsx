@@ -50,7 +50,7 @@ export function Navbar() {
   };
 
   return (
-    <nav className={navbarStyles.container()}>
+    <nav className={navbarStyles.container()} style={{ height: 'var(--navbar-height)' }}>
       <div className={navbarStyles.innerContainer()}>
         {/* Header Section with Title and Subtitle */}
         <div className={navbarStyles.headerSection()}>

@@ -6,8 +6,7 @@
 export const navbarStyles = {
   // Navbar container - fixed at top, above sidebar, doesn't shift
   container: () => {
-    // Force explicit height so the bar itself occupies space (no reliance on parent padding)
-    return 'bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-navbar shadow-sm h-[120px]';
+    return 'bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-navbar shadow-sm';
   },
   
   // Navbar inner container
