@@ -11,7 +11,7 @@ export const navigationItemVariants = cva(
     variants: {
       variant: {
         default: 'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
-        active: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        active: 'bg-gray-100 text-gray-900 hover:bg-gray-100',
         inactive: 'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
       },
     },

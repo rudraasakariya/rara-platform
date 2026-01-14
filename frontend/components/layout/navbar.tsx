@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
 import { useSidebar } from '@/contexts/sidebar-context';
 import {
@@ -17,17 +17,16 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { navbarStyles } from '@/styles';
 import {
-  Menu,
-  X,
   User,
   Settings,
   LogOut,
+  Menu,
+  X,
 } from 'lucide-react';
 
 export function Navbar() {
   const pathname = usePathname();
-  const router = useRouter();
-  const { user, logout, isAuthenticated, isLoading } = useAuth();
+  const { user, isAuthenticated, isLoading } = useAuth();
   const { isOpen, toggle } = useSidebar();
   const [isMounted, setIsMounted] = useState(false);
 
@@ -42,12 +41,6 @@ export function Navbar() {
   }
 
   const userRole = user?.role || 'tutor';
-  const isAdmin = userRole === 'admin' || userRole === 'super_admin';
-
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
-  };
 
   const getUserDisplayName = () => {
     if (user?.firstName && user?.lastName) {
@@ -61,9 +54,9 @@ export function Navbar() {
       <div className={navbarStyles.innerContainer()}>
         {/* Header Section with Title and Subtitle */}
         <div className={navbarStyles.headerSection()}>
-          {/* Left side: Hamburger button and title */}
+          {/* Left side: Hamburger button and Title */}
           <div className="flex items-center gap-4">
-            {/* Hamburger/Close Menu Button */}
+            {/* Hamburger/Close Menu Button - inside navbar, doesn't move */}
             <Button 
               variant="ghost" 
               size="icon" 
@@ -91,17 +84,6 @@ export function Navbar() {
 
           {/* Right Side Actions */}
           <div className={navbarStyles.actions()}>
-            {/* Multi-Site Operations Button - Only show for admin/super_admin */}
-            {isAdmin && (
-              <Button
-                variant="outline"
-                className="hidden md:flex items-center gap-2 h-9 px-4 text-sm font-medium border-gray-300 text-gray-700 hover:bg-gray-50 hover:text-gray-900"
-                asChild
-              >
-                <Link href="/multi-site">Multi-Site Operations</Link>
-              </Button>
-            )}
-            
             {/* User Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -133,11 +115,6 @@ export function Navbar() {
                     <Settings className="h-4 w-4" />
                     <span>Settings</span>
                   </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
-                  <LogOut className="h-4 w-4 mr-2" />
-                  <span>Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

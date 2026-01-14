@@ -11,9 +11,9 @@ export const Z_INDEX = {
   CONTENT: 10,
   
   // Navigation layers
-  NAVBAR: 50, // z-50
-  SIDEBAR: 60, // z-[60]
-  HAMBURGER: 70, // z-[70]
+  SIDEBAR: 40, // z-[40] - below navbar
+  NAVBAR: 70, // z-[70] - above sidebar
+  HAMBURGER: 80, // z-[80] - above everything
   
   // Overlay layers
   DROPDOWN: 100,

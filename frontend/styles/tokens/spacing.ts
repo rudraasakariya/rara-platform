@@ -9,9 +9,9 @@ export const SPACING = {
   SIDEBAR_COLLAPSED_WIDTH: '0px',
   
   // Navbar dimensions
-  NAVBAR_HEIGHT: '73px', // pt-[73px]
+  NAVBAR_HEIGHT: '88px', // Updated height
   NAVBAR_PADDING_X: '32px', // px-8 = 2rem = 32px
-  NAVBAR_PADDING_Y: '20px', // py-5 = 1.25rem = 20px
+  NAVBAR_PADDING_Y: '24px', // py-6 = 1.5rem = 24px
   
   // Hamburger button positioning
   HAMBURGER_LEFT: '16px', // left-4 = 1rem = 16px

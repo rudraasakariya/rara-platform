@@ -4,19 +4,20 @@
  */
 
 export const navbarStyles = {
-  // Navbar container - sticky at top of main content area
+  // Navbar container - fixed at top, above sidebar, doesn't shift
   container: () => {
-    return 'bg-white border-b border-gray-200 sticky top-0 z-navbar shadow-sm';
+    // Force explicit height so the bar itself occupies space (no reliance on parent padding)
+    return 'bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-navbar shadow-sm h-[120px]';
   },
   
   // Navbar inner container
   innerContainer: () => {
-    return 'max-w-content mx-auto px-8';
+    return 'max-w-content mx-auto px-10 h-full flex items-center';
   },
   
   // Header section
   headerSection: () => {
-    return 'flex items-center justify-between py-5';
+    return 'flex items-center justify-between w-full';
   },
   
   // Heading (h1)

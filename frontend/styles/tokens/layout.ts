@@ -9,7 +9,7 @@ export const LAYOUT = {
   SIDEBAR_COLLAPSED_WIDTH: '0px',
   
   // Navbar
-  NAVBAR_HEIGHT: '73px',
+  NAVBAR_HEIGHT: '120px',
   
   // Content
   MAX_CONTENT_WIDTH: '1920px', // max-w-[1920px]

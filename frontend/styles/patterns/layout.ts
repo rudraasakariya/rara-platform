@@ -8,7 +8,7 @@ export const LAYOUT_PATTERNS = {
   containerMax: 'max-w-[1920px] mx-auto',
   
   // Page container with padding
-  pageContainer: 'max-w-[1920px] mx-auto px-8 py-8',
+  pageContainer: 'max-w-[1920px] mx-auto px-14 py-8',
   
   // Content wrapper
   contentWrapper: 'flex-1 flex flex-col min-h-screen',

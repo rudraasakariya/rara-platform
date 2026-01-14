@@ -15,9 +15,6 @@ function DashboardContent() {
           <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground">Welcome back, {user?.firstName || user?.email}!</p>
         </div>
-        <Button onClick={logout} variant="outline">
-          Logout
-        </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -66,4 +63,3 @@ export default function DashboardPage() {
     </ProtectedRoute>
   );
 }
-

@@ -8,7 +8,7 @@ interface SidebarProps {
 
 export function Sidebar({ className }: SidebarProps) {
   return (
-    <div className="flex h-full flex-col bg-white overflow-y-auto">
+    <div className="flex flex-col bg-white">
       {/* Sidebar Content */}
       <SidebarContent />
     </div>

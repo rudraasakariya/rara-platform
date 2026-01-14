@@ -12,52 +12,18 @@ interface SidebarContextType {
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
+  // Always start with false for SSR/client consistency (prevents hydration mismatch)
+  // Sidebar is closed by default - only opens when user clicks button
+  const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  
-  // On desktop (md+), sidebar should be open by default
-  // On mobile, sidebar should be closed by default
-  const [isOpen, setIsOpen] = useState(() => {
-    if (typeof window !== 'undefined') {
-      // Check if we're on desktop (window width >= 768px)
-      const isDesktop = window.innerWidth >= 768;
-      // Check localStorage for saved preference
-      const savedState = localStorage.getItem('sidebar-open');
-      if (savedState !== null) {
-        return savedState === 'true';
-      }
-      // Default: open on desktop, closed on mobile
-      return isDesktop;
-    }
-    return false; // SSR default
-  });
 
   // Track when component has mounted to prevent hydration mismatch
   useEffect(() => {
     setIsMounted(true);
-    
-    // Set initial state based on screen size
-    const isDesktop = window.innerWidth >= 768;
-    const savedState = localStorage.getItem('sidebar-open');
-    
-    if (savedState !== null) {
-      setIsOpen(savedState === 'true');
-    } else {
-      // Default: open on desktop, closed on mobile
-      setIsOpen(isDesktop);
-    }
-    
-    // Handle window resize to adjust sidebar on mobile/desktop switch
-    const handleResize = () => {
-      const isDesktop = window.innerWidth >= 768;
-      const savedState = localStorage.getItem('sidebar-open');
-      // Only auto-adjust if no explicit preference is saved
-      if (savedState === null) {
-        setIsOpen(isDesktop);
-      }
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Clear any saved state and always start closed
+    // User must explicitly click button to open
+    localStorage.removeItem('sidebar-open');
+    setIsOpen(false);
   }, []);
 
   // Save sidebar state to localStorage (only after mount and user interaction)
