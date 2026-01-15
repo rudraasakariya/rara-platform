@@ -16,9 +16,6 @@ function DashboardContent() {
           <h1 className={pageStyles.dashboardTitle()}>Dashboard</h1>
           <p className={pageStyles.dashboardSubtitle()}>Welcome back, {user?.firstName || user?.email}!</p>
         </div>
-        <Button onClick={logout} variant="outline">
-          Logout
-        </Button>
       </div>
 
       <div className={pageStyles.dashboardGrid()}>
@@ -67,4 +64,3 @@ export default function DashboardPage() {
     </ProtectedRoute>
   );
 }
-

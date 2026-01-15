@@ -52,16 +52,16 @@ const config: Config = {
       spacing: {
         // Custom spacing values from tokens
         'sidebar': '256px', // SIDEBAR_WIDTH
-        'navbar': '73px', // NAVBAR_HEIGHT
+        'navbar': '60px', // NAVBAR_HEIGHT
         'hamburger-top': '18px', // HAMBURGER_TOP
       },
       maxWidth: {
         'content': '1920px', // MAX_CONTENT_WIDTH
       },
       zIndex: {
-        'navbar': '50',
-        'sidebar': '60',
-        'hamburger': '70',
+        'sidebar': '40',
+        'navbar': '70',
+        'hamburger': '80',
       },
     },
   },
@@ -69,4 +69,3 @@ const config: Config = {
 };
 
 export default config;
-

@@ -66,7 +66,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
   return (
     <>
       {/* Navigation Items */}
-      <nav className="flex-1 p-4 space-y-1">
+      <nav className="flex-1 px-4 py-2 space-y-1">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeItem === item.value;
@@ -90,7 +90,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
       </nav>
 
       {/* User Section */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="px-4 py-3 border-t border-gray-200">
         <Link
           href="/profile"
           onClick={handleClick}

@@ -4,24 +4,19 @@
  */
 
 export const navbarStyles = {
-  // Navbar container
-  container: (isOpen: boolean) => {
-    return `bg-white border-b border-gray-200 sticky top-0 z-navbar shadow-sm transition-all duration-300 ease-in-out ${isOpen ? 'ml-64' : 'ml-0'}`;
+  // Navbar container - fixed at top, above sidebar, doesn't shift
+  container: () => {
+    return 'bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-navbar shadow-sm';
   },
   
   // Navbar inner container
   innerContainer: () => {
-    return 'max-w-content mx-auto px-8';
+    return 'max-w-content mx-auto px-10 h-full flex items-center';
   },
   
   // Header section
   headerSection: () => {
-    return 'flex items-center justify-between py-5';
-  },
-  
-  // Title section
-  titleSection: () => {
-    return 'flex items-center pl-12';
+    return 'flex items-center justify-between w-full';
   },
   
   // Heading (h1)
@@ -39,8 +34,8 @@ export const navbarStyles = {
     return 'flex items-center gap-4';
   },
   
-  // Hamburger button
+  // Hamburger button - fixed on left, above sidebar
   hamburgerButton: () => {
-    return 'fixed left-4 top-[18px] z-hamburger h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50';
+    return 'fixed left-4 top-4 z-hamburger h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50';
   },
 } as const;
