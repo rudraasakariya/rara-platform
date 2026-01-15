@@ -10,14 +10,13 @@ interface LayoutWrapperProps {
 }
 
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
-  const { isAuthenticated } = useAuth();
   const pathname = usePathname();
 
   // Don't wrap login/register pages with MainLayout
   const isAuthPage = pathname === '/login' || pathname === '/register';
 
-  // Only wrap authenticated pages with MainLayout
-  if (isAuthenticated && !isAuthPage) {
+  // Wrap everything except auth pages with MainLayout; page-level guards handle auth
+  if (!isAuthPage) {
     return <MainLayout>{children}</MainLayout>;
   }
 

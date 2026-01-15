@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/contexts/auth-context';
@@ -35,9 +36,19 @@ interface SidebarContentProps {
 
 export function SidebarContent({ onNavigate }: SidebarContentProps) {
   const pathname = usePathname();
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+  const [isMounted, setIsMounted] = useState(false);
 
-  const userRole = user?.role || 'tutor';
+  // Track when component has mounted to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Ensure consistent role determination between server and client
+  // Default to 'tutor' during SSR, use actual role after mount
+  // This prevents hydration mismatch where server renders tutor nav items
+  // but client renders admin nav items based on user from localStorage
+  const userRole = isMounted && user?.role ? user.role : 'tutor';
   const isAdmin = userRole === 'admin' || userRole === 'super_admin';
   const navItems = isAdmin ? adminNavItems : tutorNavItems;
 
