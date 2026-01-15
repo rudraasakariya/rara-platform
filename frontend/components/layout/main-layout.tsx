@@ -17,7 +17,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   const layoutVars: CSSProperties = {
     '--navbar-height': LAYOUT.NAVBAR_HEIGHT,
     '--content-offset': LAYOUT.CONTENT_OFFSET,
-  };
+  } as CSSProperties;
 
   return (
     <div className="flex min-h-screen bg-gray-50" style={layoutVars}>
