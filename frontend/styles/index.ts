@@ -23,6 +23,8 @@ export * from './variants/containers';
 export * from './components/navbar.styles';
 export * from './components/sidebar.styles';
 export * from './components/breadcrumbs.styles';
+export * from './components/pages.styles';
+export * from './components/forms.styles';
 
 // Convenience exports
 export { SPACING as spacing } from './tokens/spacing';

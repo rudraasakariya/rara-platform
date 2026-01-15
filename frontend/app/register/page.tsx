@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { pageStyles, formStyles } from '@/styles';
 
 const registerSchema = z
   .object({
@@ -73,10 +74,10 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Create an account</CardTitle>
+    <div className={pageStyles.authContainer()}>
+      <Card className={pageStyles.authCard()}>
+        <CardHeader className={pageStyles.authCardHeader()}>
+          <CardTitle className={pageStyles.authCardTitle()}>Create an account</CardTitle>
           <CardDescription>Enter your information to create a new account</CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,8 +87,8 @@ export default function RegisterPage() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+            <div className={formStyles.formGrid()}>
+              <div className={formStyles.fieldContainer()}>
                 <Label htmlFor="firstName">First Name</Label>
                 <Input
                   id="firstName"
@@ -96,10 +97,10 @@ export default function RegisterPage() {
                   disabled={isLoading}
                 />
                 {errors.firstName && (
-                  <p className="text-sm text-destructive">{errors.firstName.message}</p>
+                  <p className={formStyles.errorMessage()}>{errors.firstName.message}</p>
                 )}
               </div>
-              <div className="space-y-2">
+              <div className={formStyles.fieldContainer()}>
                 <Label htmlFor="lastName">Last Name</Label>
                 <Input
                   id="lastName"
@@ -108,11 +109,11 @@ export default function RegisterPage() {
                   disabled={isLoading}
                 />
                 {errors.lastName && (
-                  <p className="text-sm text-destructive">{errors.lastName.message}</p>
+                  <p className={formStyles.errorMessage()}>{errors.lastName.message}</p>
                 )}
               </div>
             </div>
-            <div className="space-y-2">
+            <div className={formStyles.fieldContainer()}>
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -122,10 +123,10 @@ export default function RegisterPage() {
                 disabled={isLoading}
               />
               {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
+                <p className={formStyles.errorMessage()}>{errors.email.message}</p>
               )}
             </div>
-            <div className="space-y-2">
+            <div className={formStyles.fieldContainer()}>
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
@@ -135,10 +136,10 @@ export default function RegisterPage() {
                 disabled={isLoading}
               />
               {errors.password && (
-                <p className="text-sm text-destructive">{errors.password.message}</p>
+                <p className={formStyles.errorMessage()}>{errors.password.message}</p>
               )}
             </div>
-            <div className="space-y-2">
+            <div className={formStyles.fieldContainer()}>
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
                 id="confirmPassword"
@@ -148,17 +149,17 @@ export default function RegisterPage() {
                 disabled={isLoading}
               />
               {errors.confirmPassword && (
-                <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+                <p className={formStyles.errorMessage()}>{errors.confirmPassword.message}</p>
               )}
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
+          <CardFooter className={formStyles.formFooter()}>
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Creating account...' : 'Create account'}
             </Button>
-            <div className="text-sm text-center text-muted-foreground">
+            <div className={formStyles.formFooterLink()}>
               Already have an account?{' '}
-              <Link href="/login" className="text-primary hover:underline">
+              <Link href="/login" className={formStyles.formFooterPrimaryLink()}>
                 Sign in
               </Link>
             </div>

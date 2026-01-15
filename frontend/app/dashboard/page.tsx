@@ -4,23 +4,24 @@ import { ProtectedRoute } from '@/components/auth/protected-route';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { pageStyles } from '@/styles';
 
 function DashboardContent() {
   const { user, logout } = useAuth();
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className={pageStyles.dashboardHeader()}>
         <div>
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome back, {user?.firstName || user?.email}!</p>
+          <h1 className={pageStyles.dashboardTitle()}>Dashboard</h1>
+          <p className={pageStyles.dashboardSubtitle()}>Welcome back, {user?.firstName || user?.email}!</p>
         </div>
         <Button onClick={logout} variant="outline">
           Logout
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className={pageStyles.dashboardGrid()}>
         <Card>
           <CardHeader>
             <CardTitle>User Information</CardTitle>
