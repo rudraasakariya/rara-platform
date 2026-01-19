@@ -1,11 +1,12 @@
 /**
  * Navigation-specific patterns
  * Common patterns for navigation items, active/inactive states, etc.
+ * Note: Spacing values should use CSS variables via inline styles
  */
 
 export const NAVIGATION_PATTERNS = {
-  // Base navigation item
-  navItemBase: 'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors',
+  // Base navigation item (spacing handled via inline styles)
+  navItemBase: 'flex items-center rounded-md text-sm font-medium transition-colors',
   
   // Active navigation item
   navItemActive: 'bg-primary text-primary-foreground hover:bg-primary/90',
@@ -13,6 +14,6 @@ export const NAVIGATION_PATTERNS = {
   // Inactive navigation item
   navItemInactive: 'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
   
-  // Navigation container
-  navContainer: 'flex-1 p-4 space-y-1',
+  // Navigation container (spacing handled via inline styles)
+  navContainer: 'flex-1',
 } as const;

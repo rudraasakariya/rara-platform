@@ -51,11 +51,14 @@ export function Navbar() {
 
   return (
     <nav className={navbarStyles.container()} style={{ height: 'var(--navbar-height)' }}>
-      <div className={navbarStyles.innerContainer()}>
+      <div 
+        className={navbarStyles.innerContainer()}
+        style={{ paddingLeft: 'var(--navbar-padding-x)', paddingRight: 'var(--navbar-padding-x)' }}
+      >
         {/* Header Section with Title and Subtitle */}
         <div className={navbarStyles.headerSection()}>
           {/* Left side: Hamburger button and Title */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center" style={{ gap: 'var(--spacing-lg)' }}>
             {/* Hamburger/Close Menu Button - inside navbar, doesn't move */}
             <Button 
               variant="ghost" 
@@ -73,7 +76,13 @@ export function Navbar() {
             
             {/* Title Section */}
             <div>
-              <h1 className={navbarStyles.heading()}>
+              <h1 
+                className={navbarStyles.heading()}
+                style={{ 
+                  fontSize: 'var(--heading-1-size)', 
+                  lineHeight: 'var(--heading-1-line-height)' 
+                }}
+              >
                 Tutoring Program Dashboard
               </h1>
               <p className={navbarStyles.subtitle()}>
@@ -83,7 +92,7 @@ export function Navbar() {
           </div>
 
           {/* Right Side Actions */}
-          <div className={navbarStyles.actions()}>
+          <div className={navbarStyles.actions()} style={{ gap: 'var(--spacing-lg)' }}>
             {/* User Menu */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

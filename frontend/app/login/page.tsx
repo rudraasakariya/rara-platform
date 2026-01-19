@@ -75,7 +75,10 @@ export default function LoginPage() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <div className={formStyles.fieldContainer()}>
+            <div 
+              className={formStyles.fieldContainer()}
+              style={{ gap: 'var(--spacing-sm)' }}
+            >
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -88,7 +91,10 @@ export default function LoginPage() {
                 <p className={formStyles.errorMessage()}>{errors.email.message}</p>
               )}
             </div>
-            <div className={formStyles.fieldContainer()}>
+            <div 
+              className={formStyles.fieldContainer()}
+              style={{ gap: 'var(--spacing-sm)' }}
+            >
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
@@ -102,7 +108,10 @@ export default function LoginPage() {
               )}
             </div>
           </CardContent>
-          <CardFooter className={formStyles.formFooter()}>
+          <CardFooter 
+            className={formStyles.formFooter()}
+            style={{ gap: 'var(--spacing-lg)' }}
+          >
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>

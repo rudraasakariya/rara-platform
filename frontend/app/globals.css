@@ -24,6 +24,55 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    
+    /* Layout dimensions */
+    --sidebar-width: 256px;
+    --navbar-height: 60px;
+    --max-content-width: 1920px;
+    --content-offset: 12px;
+    
+    /* Content margins (calculated) */
+    --content-margin-open: 288px; /* sidebar-width (256px) + margin (32px) */
+    --content-margin-closed: 32px;
+    
+    /* Spacing scale */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+    --spacing-3xl: 40px;
+    --spacing-4xl: 56px;
+    
+    /* Content spacing */
+    --content-padding-x: 32px;
+    --content-padding-y: 32px;
+    --content-padding-x-large: 56px;
+    
+    /* Navbar spacing */
+    --navbar-padding-x: 40px;
+    --navbar-padding-y: 24px;
+    
+    /* Navigation spacing */
+    --nav-item-padding-x: 12px;
+    --nav-item-padding-y: 8px;
+    --nav-item-gap: 12px;
+    
+    /* Breadcrumb spacing */
+    --breadcrumb-gap: 8px;
+    --breadcrumb-margin-bottom: 24px;
+    
+    /* Section spacing */
+    --section-gap: 24px;
+    
+    /* Hamburger positioning */
+    --hamburger-left: 16px;
+    --hamburger-top: 18px;
+    
+    /* Typography */
+    --heading-1-size: 28px;
+    --heading-1-line-height: 34px;
   }
 
   .dark {
@@ -73,8 +122,9 @@
   }
   
   /* Navigation patterns */
+  /* Note: Spacing (gap, padding) should be handled via inline styles using CSS variables */
   .nav-item-base {
-    @apply flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors;
+    @apply flex items-center rounded-md text-sm font-medium transition-colors;
   }
   
   .nav-item-active {

@@ -83,8 +83,9 @@ export function Breadcrumbs({ className, maxItems }: BreadcrumbsProps) {
     <nav
       aria-label="Breadcrumb"
       className={cn(breadcrumbsStyles.container(), className)}
+      style={{ gap: 'var(--breadcrumb-gap)' }}
     >
-      <ol className={breadcrumbsStyles.list()}>
+      <ol className={breadcrumbsStyles.list()} style={{ gap: 'var(--breadcrumb-gap)' }}>
         {displayBreadcrumbs.map((breadcrumb, index) => {
           const isLast = index === displayBreadcrumbs.length - 1;
           const isEllipsis = breadcrumb.label === '...';
@@ -101,7 +102,10 @@ export function Breadcrumbs({ className, maxItems }: BreadcrumbsProps) {
                 </Link>
               ) : (
                 <>
-                  <ChevronRight className={breadcrumbsStyles.separator()} />
+                  <ChevronRight 
+                    className={breadcrumbsStyles.separator()} 
+                    style={{ marginLeft: 'var(--spacing-sm)', marginRight: 'var(--spacing-sm)' }}
+                  />
                   {isLast ? (
                     <span className={breadcrumbsStyles.active()} aria-current="page">
                       {breadcrumb.label}
