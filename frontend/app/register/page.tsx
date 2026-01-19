@@ -88,7 +88,10 @@ export default function RegisterPage() {
               </Alert>
             )}
             <div className={formStyles.formGrid()}>
-              <div className={formStyles.fieldContainer()}>
+              <div 
+                className={formStyles.fieldContainer()}
+                style={{ gap: 'var(--spacing-sm)' }}
+              >
                 <Label htmlFor="firstName">First Name</Label>
                 <Input
                   id="firstName"
@@ -100,7 +103,10 @@ export default function RegisterPage() {
                   <p className={formStyles.errorMessage()}>{errors.firstName.message}</p>
                 )}
               </div>
-              <div className={formStyles.fieldContainer()}>
+              <div 
+                className={formStyles.fieldContainer()}
+                style={{ gap: 'var(--spacing-sm)' }}
+              >
                 <Label htmlFor="lastName">Last Name</Label>
                 <Input
                   id="lastName"
@@ -113,7 +119,10 @@ export default function RegisterPage() {
                 )}
               </div>
             </div>
-            <div className={formStyles.fieldContainer()}>
+            <div 
+              className={formStyles.fieldContainer()}
+              style={{ gap: 'var(--spacing-sm)' }}
+            >
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
@@ -126,7 +135,10 @@ export default function RegisterPage() {
                 <p className={formStyles.errorMessage()}>{errors.email.message}</p>
               )}
             </div>
-            <div className={formStyles.fieldContainer()}>
+            <div 
+              className={formStyles.fieldContainer()}
+              style={{ gap: 'var(--spacing-sm)' }}
+            >
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
@@ -139,7 +151,10 @@ export default function RegisterPage() {
                 <p className={formStyles.errorMessage()}>{errors.password.message}</p>
               )}
             </div>
-            <div className={formStyles.fieldContainer()}>
+            <div 
+              className={formStyles.fieldContainer()}
+              style={{ gap: 'var(--spacing-sm)' }}
+            >
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input
                 id="confirmPassword"
@@ -153,7 +168,10 @@ export default function RegisterPage() {
               )}
             </div>
           </CardContent>
-          <CardFooter className={formStyles.formFooter()}>
+          <CardFooter 
+            className={formStyles.formFooter()}
+            style={{ gap: 'var(--spacing-lg)' }}
+          >
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? 'Creating account...' : 'Create account'}
             </Button>

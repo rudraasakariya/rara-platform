@@ -1,16 +1,17 @@
 /**
  * Form-specific style utilities
+ * Note: Spacing values should use CSS variables via inline styles
  */
 
 export const formStyles = {
   // Form field container
   fieldContainer: () => {
-    return 'space-y-2';
+    return 'flex flex-col gap-2';
   },
   
   // Form grid (for side-by-side fields)
   formGrid: () => {
-    return 'grid grid-cols-2 gap-4';
+    return 'grid grid-cols-1 gap-4 md:grid-cols-2';
   },
   
   // Error message
@@ -20,7 +21,7 @@ export const formStyles = {
   
   // Form footer
   formFooter: () => {
-    return 'flex flex-col space-y-4';
+    return 'flex flex-col gap-3';
   },
   
   // Link in form footer
