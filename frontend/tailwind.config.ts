@@ -50,13 +50,22 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       spacing: {
-        // Custom spacing values from tokens
-        'sidebar': '256px', // SIDEBAR_WIDTH
-        'navbar': '60px', // NAVBAR_HEIGHT
-        'hamburger-top': '18px', // HAMBURGER_TOP
+        // Custom spacing values using CSS variables
+        'sidebar': 'var(--sidebar-width)',
+        'navbar': 'var(--navbar-height)',
+        'hamburger-top': 'var(--hamburger-top)',
+        // Spacing scale
+        'spacing-xs': 'var(--spacing-xs)',
+        'spacing-sm': 'var(--spacing-sm)',
+        'spacing-md': 'var(--spacing-md)',
+        'spacing-lg': 'var(--spacing-lg)',
+        'spacing-xl': 'var(--spacing-xl)',
+        'spacing-2xl': 'var(--spacing-2xl)',
+        'spacing-3xl': 'var(--spacing-3xl)',
+        'spacing-4xl': 'var(--spacing-4xl)',
       },
       maxWidth: {
-        'content': '1920px', // MAX_CONTENT_WIDTH
+        'content': 'var(--max-content-width)',
       },
       zIndex: {
         'sidebar': '40',
