@@ -3,7 +3,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { authApi, type User, type LoginRequest, type RegisterRequest } from '@/lib/api/auth';
-import { storeToken, removeToken, clearAuth, storeUser, getStoredUser, getToken } from '@/lib/auth-utils';
 import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
@@ -19,13 +18,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  // Initialize user from localStorage immediately to prevent redirect on refresh
-  const [user, setUser] = useState<User | null>(() => {
-    if (typeof window !== 'undefined') {
-      return getStoredUser();
-    }
-    return null;
-  });
+  const [user, setUser] = useState<User | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -35,10 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsMounted(true);
   }, []);
 
-  // Check if token exists on mount (only on client)
-  const hasToken = typeof window !== 'undefined' && getToken() !== null;
-
-  // Fetch current user - this will verify/refresh the stored user
+  // Fetch current user from cookie-based auth
   const {
     data: userData,
     isLoading: isLoadingUser,
@@ -47,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   } = useQuery({
     queryKey: ['auth', 'me'],
     queryFn: authApi.getMe,
-    enabled: hasToken && isMounted, // Only fetch after mount
+    enabled: isMounted, // Only fetch after mount
     retry: false,
     staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
   });
@@ -56,48 +46,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (userData) {
       setUser(userData);
-      storeUser(userData);
-    } else if (!hasToken && isMounted) {
-      // Only clear user if there's no token and we're mounted
+    } else if (isMounted && userError) {
+      // Clear user on auth error
       setUser(null);
     }
-  }, [userData, hasToken, isMounted]);
+  }, [userData, userError, isMounted]);
 
-  // Handle auth errors - only clear on actual authentication errors
-  useEffect(() => {
-    if (userError && isMounted) {
-      // Check if it's an authentication error (401/403)
-      const isAuthError = 
-        (userError as any)?.response?.status === 401 ||
-        (userError as any)?.response?.status === 403;
-      
-      if (isAuthError) {
-        // Token is invalid, clear auth
-        clearAuth();
-        setUser(null);
-      }
-      // If it's not an auth error (network error, etc.), keep the stored user
-    }
-  }, [userError, isMounted]);
-
-  // Login mutation
+  // Login mutation - now uses cookie-based auth
   const loginMutation = useMutation({
     mutationFn: authApi.login,
     onSuccess: (data) => {
-      storeToken(data.access_token);
-      storeUser(data.user);
       setUser(data.user);
       queryClient.setQueryData(['auth', 'me'], data.user);
       router.push('/dashboard');
     },
   });
 
-  // Register mutation
+  // Register mutation - now uses cookie-based auth
   const registerMutation = useMutation({
     mutationFn: authApi.register,
     onSuccess: (data) => {
-      storeToken(data.access_token);
-      storeUser(data.user);
       setUser(data.user);
       queryClient.setQueryData(['auth', 'me'], data.user);
       router.push('/dashboard');
@@ -118,11 +86,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     [registerMutation]
   );
 
-  const logout = useCallback(() => {
-    clearAuth();
-    setUser(null);
-    queryClient.clear();
-    router.push('/login');
+  const logout = useCallback(async () => {
+    try {
+      // Call logout API to clear cookie
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      // Clear client state regardless of API call result
+      setUser(null);
+      queryClient.clear();
+      router.push('/login');
+    }
   }, [router, queryClient]);
 
   // Ensure isLoading is false during SSR to prevent hydration mismatch
@@ -130,8 +108,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     ? (isLoadingUser || loginMutation.isPending || registerMutation.isPending)
     : false;
 
-  // Check authentication status - user exists OR token exists (prevents redirect during refresh)
-  const isAuthenticated = !!user || (typeof window !== 'undefined' && getToken() !== null);
+  // Check authentication status
+  const isAuthenticated = !!user;
 
   const value: AuthContextType = {
     user,
@@ -153,4 +131,3 @@ export function useAuth() {
   }
   return context;
 }
-
