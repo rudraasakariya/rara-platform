@@ -1,14 +1,15 @@
 /**
  * Common layout patterns using Tailwind @apply directives
  * These can be used in globals.css or component styles
+ * Uses CSS custom properties for dynamic values
  */
 
 export const LAYOUT_PATTERNS = {
   // Max-width container
-  containerMax: 'max-w-[1920px] mx-auto',
+  containerMax: 'max-w-[var(--max-content-width)] mx-auto',
   
   // Page container with padding
-  pageContainer: 'max-w-[1920px] mx-auto px-14 py-8',
+  pageContainer: 'max-w-[var(--max-content-width)] mx-auto px-[var(--content-padding-x-large)] py-[var(--content-padding-y)]',
   
   // Content wrapper
   contentWrapper: 'flex-1 flex flex-col min-h-screen',
