@@ -11,12 +11,12 @@ export const pageStyles = {
   
   // Auth card
   authCard: () => {
-    return 'w-full max-w-md';
+    return 'w-full max-w-md mx-auto';
   },
   
-  // Auth card header
+  // Auth card header (spacing handled via inline styles)
   authCardHeader: () => {
-    return 'space-y-1';
+    return '';
   },
   
   // Auth card title
@@ -26,7 +26,7 @@ export const pageStyles = {
   
   // Dashboard header section
   dashboardHeader: () => {
-    return 'flex justify-between items-center mb-8';
+    return 'w-full max-w-5xl mx-auto flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between';
   },
   
   // Dashboard title
@@ -39,9 +39,9 @@ export const pageStyles = {
     return 'text-muted-foreground';
   },
   
-  // Dashboard grid
+  // Dashboard grid - responsive columnar grid layout
   dashboardGrid: () => {
-    return 'grid gap-4 md:grid-cols-2 lg:grid-cols-3';
+    return 'w-full max-w-5xl mx-auto grid';
   },
   
   // Loading container

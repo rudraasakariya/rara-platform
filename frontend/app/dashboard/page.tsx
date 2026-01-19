@@ -18,8 +18,14 @@ function DashboardContent() {
         </div>
       </div>
 
-      <div className={pageStyles.dashboardGrid()}>
-        <Card>
+      <div 
+        className={pageStyles.dashboardGrid()}
+        style={{
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: 'var(--spacing-xl)',
+        }}
+      >
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>User Information</CardTitle>
             <CardDescription>Your account details</CardDescription>
@@ -41,7 +47,7 @@ function DashboardContent() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="w-full">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
             <CardDescription>Common tasks</CardDescription>
