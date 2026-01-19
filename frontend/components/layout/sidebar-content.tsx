@@ -77,31 +77,56 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
   return (
     <>
       {/* Navigation Items */}
-      <nav className="flex-1 px-4 py-2 space-y-1">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeItem === item.value;
+      <nav 
+        className="flex-1"
+        style={{
+          paddingLeft: 'var(--spacing-lg)',
+          paddingRight: 'var(--spacing-lg)',
+          paddingTop: 'var(--spacing-sm)',
+          paddingBottom: 'var(--spacing-sm)',
+        }}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-xs)' }}>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeItem === item.value;
 
-          return (
-            <Link
-              key={item.value}
-              href={item.href}
-              onClick={handleClick}
-              className={cn(
-                navigationItemVariants({
-                  variant: isActive ? 'active' : 'inactive',
-                })
-              )}
-            >
-              <Icon className="h-5 w-5 flex-shrink-0" />
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                key={item.value}
+                href={item.href}
+                onClick={handleClick}
+                className={cn(
+                  navigationItemVariants({
+                    variant: isActive ? 'active' : 'inactive',
+                  })
+                )}
+                style={{
+                  gap: 'var(--nav-item-gap)',
+                  paddingLeft: 'var(--nav-item-padding-x)',
+                  paddingRight: 'var(--nav-item-padding-x)',
+                  paddingTop: 'var(--nav-item-padding-y)',
+                  paddingBottom: 'var(--nav-item-padding-y)',
+                }}
+              >
+                <Icon className="h-5 w-5 flex-shrink-0" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
       </nav>
 
       {/* User Section */}
-      <div className="px-4 py-3 border-t border-gray-200">
+      <div 
+        className="border-t border-gray-200"
+        style={{
+          paddingLeft: 'var(--spacing-lg)',
+          paddingRight: 'var(--spacing-lg)',
+          paddingTop: 'var(--spacing-md)',
+          paddingBottom: 'var(--spacing-md)',
+        }}
+      >
         <Link
           href="/profile"
           onClick={handleClick}
@@ -110,6 +135,13 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
               variant: pathname === '/profile' ? 'active' : 'inactive',
             })
           )}
+          style={{
+            gap: 'var(--nav-item-gap)',
+            paddingLeft: 'var(--nav-item-padding-x)',
+            paddingRight: 'var(--nav-item-padding-x)',
+            paddingTop: 'var(--nav-item-padding-y)',
+            paddingBottom: 'var(--nav-item-padding-y)',
+          }}
         >
           <User className="h-5 w-5 flex-shrink-0" />
           <span>Profile</span>
@@ -122,6 +154,13 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
               variant: pathname === '/settings' ? 'active' : 'inactive',
             })
           )}
+          style={{
+            gap: 'var(--nav-item-gap)',
+            paddingLeft: 'var(--nav-item-padding-x)',
+            paddingRight: 'var(--nav-item-padding-x)',
+            paddingTop: 'var(--nav-item-padding-y)',
+            paddingBottom: 'var(--nav-item-padding-y)',
+          }}
         >
           <Settings className="h-5 w-5 flex-shrink-0" />
           <span>Settings</span>
