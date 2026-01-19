@@ -1,6 +1,7 @@
 /**
  * Navbar-specific style utilities
  * Functions that return className strings for navbar components
+ * Uses CSS custom properties for spacing and typography
  */
 
 export const navbarStyles = {
@@ -11,7 +12,7 @@ export const navbarStyles = {
   
   // Navbar inner container
   innerContainer: () => {
-    return 'max-w-content mx-auto px-10 h-full flex items-center';
+    return 'max-w-content mx-auto h-full flex items-center';
   },
   
   // Header section
@@ -21,7 +22,7 @@ export const navbarStyles = {
   
   // Heading (h1)
   heading: () => {
-    return 'text-[28px] font-semibold text-gray-900 leading-[34px] tracking-tight';
+    return 'font-semibold text-gray-900 tracking-tight';
   },
   
   // Subtitle (p)
@@ -31,11 +32,11 @@ export const navbarStyles = {
   
   // Right side actions
   actions: () => {
-    return 'flex items-center gap-4';
+    return 'flex items-center';
   },
   
   // Hamburger button - fixed on left, above sidebar
   hamburgerButton: () => {
-    return 'fixed left-4 top-4 z-hamburger h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50';
+    return 'fixed z-hamburger h-9 w-9 bg-white border border-gray-200 shadow-sm hover:bg-gray-50';
   },
 } as const;

@@ -1,17 +1,18 @@
 /**
  * Breadcrumbs-specific style utilities
  * Functions that return className strings for breadcrumb components
+ * Uses CSS custom properties for spacing
  */
 
 export const breadcrumbsStyles = {
   // Breadcrumb container
   container: () => {
-    return 'flex items-center space-x-2 text-sm text-gray-600';
+    return 'flex items-center text-sm text-gray-600';
   },
   
   // Breadcrumb list
   list: () => {
-    return 'flex items-center space-x-2';
+    return 'flex items-center';
   },
   
   // Breadcrumb item
@@ -36,7 +37,7 @@ export const breadcrumbsStyles = {
   
   // Separator (chevron)
   separator: () => {
-    return 'h-4 w-4 text-gray-400 mx-2';
+    return 'h-4 w-4 text-gray-400';
   },
   
   // Ellipsis
