@@ -49,6 +49,11 @@ export const Messages: Record<MessageCode, string> = {
   [MessageCode.TUTOR_CREATION_FAILED]: 'Failed to create tutor',
   [MessageCode.USER_NOT_TUTOR]: 'User is not a tutor',
   [MessageCode.USER_ALREADY_TUTOR]: 'User is already assigned as a tutor',
+
+  // Partner errors
+  [MessageCode.PARTNER_NOT_FOUND]: 'Partner not found',
+  [MessageCode.PARTNER_ALREADY_EXISTS]: 'Partner already exists',
+  [MessageCode.PARTNER_CREATION_FAILED]: 'Failed to create partner',
 };
 
 /**
