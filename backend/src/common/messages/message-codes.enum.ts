@@ -39,6 +39,7 @@ export enum MessageCode {
 
   // Site errors
   SITE_NOT_FOUND = 'SITE_NOT_FOUND',
+  SITE_CANNOT_BE_DELETED = 'SITE_CANNOT_BE_DELETED',
 
   // Tutor errors
   TUTOR_NOT_FOUND = 'TUTOR_NOT_FOUND',
