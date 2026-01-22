@@ -41,6 +41,7 @@ export const Messages: Record<MessageCode, string> = {
 
   // Site errors
   [MessageCode.SITE_NOT_FOUND]: 'Site not found',
+  [MessageCode.SITE_CANNOT_BE_DELETED]: 'Cannot delete site that has associated students or sessions',
 
   // Tutor errors
   [MessageCode.TUTOR_NOT_FOUND]: 'Tutor not found',
