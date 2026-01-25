@@ -7,8 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { sitesApi } from '@/lib/api/sites';
 import { partnersApi } from '@/lib/api/partners';
+import { getErrorMessage } from '@/lib/api-client';
 import { pageStyles } from '@/styles';
-import { Loader2 } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function StructureContent() {
   // Fetch all sites
@@ -77,8 +78,11 @@ export function StructureContent() {
       {hasError && (
         <Card className="mb-6 border-destructive">
           <CardContent className="pt-6">
-            <p className="text-sm text-destructive">
-              Error loading structure data. Please try again later.
+            <p className="font-medium text-destructive">Error loading structure data</p>
+            <p className="text-sm text-destructive mt-1">
+              {sitesError ? getErrorMessage(sitesError) : 
+               partnersError ? getErrorMessage(partnersError) : 
+               'Please try again later.'}
             </p>
           </CardContent>
         </Card>
@@ -98,10 +102,7 @@ export function StructureContent() {
           </CardHeader>
           <CardContent>
             {isLoadingSites ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{allSites.length}</p>
             )}
@@ -115,10 +116,7 @@ export function StructureContent() {
           </CardHeader>
           <CardContent>
             {isLoadingActiveSites ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{activeSites.length}</p>
             )}
@@ -132,10 +130,7 @@ export function StructureContent() {
           </CardHeader>
           <CardContent>
             {isLoadingPartners ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{allPartners.length}</p>
             )}
@@ -149,10 +144,7 @@ export function StructureContent() {
           </CardHeader>
           <CardContent>
             {isLoadingActivePartners ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{activePartners.length}</p>
             )}

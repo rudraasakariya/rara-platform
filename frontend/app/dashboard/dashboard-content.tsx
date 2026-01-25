@@ -10,7 +10,8 @@ import { pageStyles } from '@/styles';
 import type { User } from '@/lib/api/auth';
 import { sitesApi } from '@/lib/api/sites';
 import { partnersApi } from '@/lib/api/partners';
-import { Loader2 } from 'lucide-react';
+import { getErrorMessage } from '@/lib/api-client';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface DashboardContentProps {
   initialUser: User;
@@ -87,8 +88,11 @@ export function DashboardContent({ initialUser }: DashboardContentProps) {
       {hasError && (
         <Card className="mb-6 border-destructive">
           <CardContent className="pt-6">
-            <p className="text-sm text-destructive">
-              Error loading dashboard data. Please try again later.
+            <p className="font-medium text-destructive">Error loading dashboard data</p>
+            <p className="text-sm text-destructive mt-1">
+              {sitesError ? getErrorMessage(sitesError) : 
+               partnersError ? getErrorMessage(partnersError) : 
+               'Please try again later.'}
             </p>
           </CardContent>
         </Card>
@@ -108,10 +112,7 @@ export function DashboardContent({ initialUser }: DashboardContentProps) {
           </CardHeader>
           <CardContent>
             {isLoadingSites ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{allSites.length}</p>
             )}
@@ -125,10 +126,7 @@ export function DashboardContent({ initialUser }: DashboardContentProps) {
           </CardHeader>
           <CardContent>
             {isLoadingActiveSites ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{activeSites.length}</p>
             )}
@@ -142,10 +140,7 @@ export function DashboardContent({ initialUser }: DashboardContentProps) {
           </CardHeader>
           <CardContent>
             {isLoadingPartners ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{allPartners.length}</p>
             )}
@@ -159,10 +154,7 @@ export function DashboardContent({ initialUser }: DashboardContentProps) {
           </CardHeader>
           <CardContent>
             {isLoadingActivePartners ? (
-              <div className="flex items-center gap-2">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                <span className="text-sm text-muted-foreground">Loading...</span>
-              </div>
+              <Skeleton className="h-9 w-16" />
             ) : (
               <p className="text-3xl font-bold">{activePartners.length}</p>
             )}
