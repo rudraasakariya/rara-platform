@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../database/entities/user.entity';
 import { MessageCode, Messages } from '../../common/messages';
+import { Request } from 'express';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -15,7 +16,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private userRepository: Repository<User>,
   ) {
     super({
-        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        jwtFromRequest: ExtractJwt.fromExtractors([
+          // First try to extract from cookie
+          (request: Request) => {
+            return request?.cookies?.['auth-token'] || null;
+          },
+          // Fall back to Authorization header
+          ExtractJwt.fromAuthHeaderAsBearerToken(),
+        ]),
         secretOrKey: configService.get<string>('JWT_SECRET')!,
       });
   }
