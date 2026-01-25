@@ -3,9 +3,9 @@
 import * as React from 'react';
 import { useAuth } from '@/contexts/auth-context';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { pageStyles } from '@/styles';
 import type { User } from '@/lib/api/auth';
-import { Loader2 } from 'lucide-react';
 
 interface ProfileContentProps {
   initialUser: User;
@@ -23,10 +23,32 @@ export function ProfileContent({ initialUser }: ProfileContentProps) {
 
   if (isLoading && !currentUser) {
     return (
-      <div className={pageStyles.loadingContainer()}>
-        <div className="flex items-center gap-2">
-          <Loader2 className="h-6 w-6 animate-spin" />
-          <span className="text-sm text-muted-foreground">Loading profile...</span>
+      <div>
+        <div className={pageStyles.dashboardHeader()}>
+          <div>
+            <h1 className={pageStyles.dashboardTitle()}>Profile</h1>
+            <p className={pageStyles.dashboardSubtitle()}>
+              Your account information
+            </p>
+          </div>
+        </div>
+        <div className="w-full max-w-2xl mx-auto mt-6">
+          <Card>
+            <CardHeader>
+              <Skeleton className="h-6 w-32" />
+              <Skeleton className="h-4 w-48 mt-2" />
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <div key={i}>
+                    <Skeleton className="h-4 w-24 mb-2" />
+                    <Skeleton className="h-6 w-full" />
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     );

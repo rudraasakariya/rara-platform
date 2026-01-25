@@ -10,6 +10,7 @@ import { FormDialog } from '@/components/ui/form-dialog';
 import { DeleteDialog } from '@/components/ui/delete-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { partnersApi, type Partner, type SearchPartnersQuery, type CreatePartnerDto } from '@/lib/api/partners';
+import { getErrorMessage } from '@/lib/api-client';
 import { pageStyles } from '@/styles';
 import { PartnerForm, type PartnerFormRef } from './partner-form';
 
@@ -51,10 +52,10 @@ export function PartnersContent() {
       setIsCreateDialogOpen(false);
       queryClient.invalidateQueries({ queryKey: ['partners'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error?.response?.data?.message || 'Failed to create partner',
+        description: getErrorMessage(error),
         variant: 'destructive',
       });
     },
@@ -73,10 +74,10 @@ export function PartnersContent() {
       setSelectedPartner(null);
       queryClient.invalidateQueries({ queryKey: ['partners'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error?.response?.data?.message || 'Failed to update partner',
+        description: getErrorMessage(error),
         variant: 'destructive',
       });
     },
@@ -94,11 +95,10 @@ export function PartnersContent() {
       setSelectedPartner(null);
       queryClient.invalidateQueries({ queryKey: ['partners'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description:
-          error?.response?.data?.message || 'Failed to delete partner',
+        description: getErrorMessage(error),
         variant: 'destructive',
       });
     },
@@ -252,7 +252,8 @@ export function PartnersContent() {
 
         {error && (
           <div className="mb-4 p-4 bg-destructive/10 text-destructive rounded-md">
-            Failed to load partners. Please try again.
+            <p className="font-medium">Failed to load partners</p>
+            <p className="text-sm mt-1">{getErrorMessage(error)}</p>
           </div>
         )}
 

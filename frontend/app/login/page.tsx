@@ -7,6 +7,7 @@ import * as z from 'zod';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/auth-context';
 import { useToast } from '@/hooks/use-toast';
+import { getErrorMessage } from '@/lib/api-client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -49,9 +50,8 @@ export default function LoginPage() {
         title: 'Login successful',
         description: 'Welcome back!',
       });
-    } catch (err: any) {
-      const errorMessage =
-        err?.response?.data?.message || err?.message || 'Login failed. Please try again.';
+    } catch (err: unknown) {
+      const errorMessage = getErrorMessage(err);
       setError(errorMessage);
       toast({
         title: 'Login failed',

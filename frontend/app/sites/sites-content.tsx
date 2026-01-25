@@ -10,6 +10,7 @@ import { FormDialog } from '@/components/ui/form-dialog';
 import { DeleteDialog } from '@/components/ui/delete-dialog';
 import { useToast } from '@/hooks/use-toast';
 import { sitesApi, type Site, type SearchSitesQuery, type CreateSiteDto } from '@/lib/api/sites';
+import { getErrorMessage } from '@/lib/api-client';
 import { pageStyles } from '@/styles';
 import { SiteForm, type SiteFormRef } from './site-form';
 
@@ -51,10 +52,10 @@ export function SitesContent() {
       setIsCreateDialogOpen(false);
       queryClient.invalidateQueries({ queryKey: ['sites'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error?.response?.data?.message || 'Failed to create site',
+        description: getErrorMessage(error),
         variant: 'destructive',
       });
     },
@@ -73,10 +74,10 @@ export function SitesContent() {
       setSelectedSite(null);
       queryClient.invalidateQueries({ queryKey: ['sites'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description: error?.response?.data?.message || 'Failed to update site',
+        description: getErrorMessage(error),
         variant: 'destructive',
       });
     },
@@ -94,11 +95,10 @@ export function SitesContent() {
       setSelectedSite(null);
       queryClient.invalidateQueries({ queryKey: ['sites'] });
     },
-    onError: (error: any) => {
+    onError: (error: unknown) => {
       toast({
         title: 'Error',
-        description:
-          error?.response?.data?.message || 'Failed to delete site',
+        description: getErrorMessage(error),
         variant: 'destructive',
       });
     },
@@ -243,7 +243,8 @@ export function SitesContent() {
 
         {error && (
           <div className="mb-4 p-4 bg-destructive/10 text-destructive rounded-md">
-            Failed to load sites. Please try again.
+            <p className="font-medium">Failed to load sites</p>
+            <p className="text-sm mt-1">{getErrorMessage(error)}</p>
           </div>
         )}
 
