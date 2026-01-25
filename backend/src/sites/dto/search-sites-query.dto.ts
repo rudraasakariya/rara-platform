@@ -1,8 +1,14 @@
 import { IsOptional, IsBoolean, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 
 export class SearchSitesQueryDto {
   @IsOptional()
+  @Transform(({ value }) => {
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    return value;
+  })
   @IsBoolean()
   @ApiProperty({
     description: 'Filter sites by active status',
