@@ -34,6 +34,7 @@ postgres-data/
 # IDE
 .vscode/
 .idea/
+.cursor/
 *.swp
 *.swo
 *~
