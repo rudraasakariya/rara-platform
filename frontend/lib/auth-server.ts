@@ -26,8 +26,7 @@ export async function getServerUser(): Promise<User | null> {
     });
 
     if (!response.ok) {
-      // Token is invalid, clear it
-      cookieStore.delete('auth-token');
+      // Token is invalid - return null (cookie will be cleared on client-side or via logout route)
       return null;
     }
 

@@ -7,8 +7,9 @@ export default async function DashboardPage() {
   const user = await getServerUser();
   
   // Redirect to login if not authenticated
+  // Add query param to prevent middleware from redirecting back
   if (!user) {
-    redirect('/login');
+    redirect('/login?invalid_token=true');
   }
 
   // Pass user to client component
