@@ -21,4 +21,8 @@ export { ActionItem } from './action-item.entity';
 export { Recommendation } from './recommendation.entity';
 export { AuditLog } from './audit-log.entity';
 export { Notification } from './notification.entity';
+export { CurriculumGrade } from './curriculum-grade.entity';
+export { CurriculumDomain } from './curriculum-domain.entity';
+export { CurriculumCluster } from './curriculum-cluster.entity';
+export { CurriculumSkill } from './curriculum-skill.entity';
 
