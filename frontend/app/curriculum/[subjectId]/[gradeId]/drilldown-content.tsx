@@ -14,6 +14,22 @@ interface DrilldownContentProps {
 
 export function DrilldownContent({ subjectId, gradeId }: DrilldownContentProps) {
   const [selectedTaxonomy, setSelectedTaxonomy] = React.useState<TaxonomySelectorValue | null>(null);
+  const handleTaxonomyChange = React.useCallback((value: TaxonomySelectorValue) => {
+    setSelectedTaxonomy((previousValue) => {
+      if (
+        previousValue &&
+        previousValue.subjectId === value.subjectId &&
+        previousValue.gradeId === value.gradeId &&
+        previousValue.domainId === value.domainId &&
+        previousValue.clusterId === value.clusterId &&
+        previousValue.skillId === value.skillId
+      ) {
+        return previousValue;
+      }
+
+      return value;
+    });
+  }, []);
 
   const {
     data: tree,
@@ -33,7 +49,7 @@ export function DrilldownContent({ subjectId, gradeId }: DrilldownContentProps) 
         <CardContent>
           <TaxonomySelector
             value={{ subjectId, gradeId }}
-            onChange={(value) => setSelectedTaxonomy(value)}
+            onChange={handleTaxonomyChange}
           />
           {selectedTaxonomy && (
             <p className="mt-3 text-sm text-muted-foreground">

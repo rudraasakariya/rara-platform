@@ -26,14 +26,14 @@ interface TaxonomySelectorProps {
   disabled?: boolean;
 }
 
-function buildNextValue(
-  current: TaxonomySelectorValue,
-  update: Partial<TaxonomySelectorValue>,
-): TaxonomySelectorValue {
-  return {
-    ...current,
-    ...update,
-  };
+function isSameTaxonomyValue(left: TaxonomySelectorValue, right: TaxonomySelectorValue): boolean {
+  return (
+    left.subjectId === right.subjectId &&
+    left.gradeId === right.gradeId &&
+    left.domainId === right.domainId &&
+    left.clusterId === right.clusterId &&
+    left.skillId === right.skillId
+  );
 }
 
 export function TaxonomySelector({ value, onChange, disabled = false }: TaxonomySelectorProps) {
@@ -42,6 +42,8 @@ export function TaxonomySelector({ value, onChange, disabled = false }: Taxonomy
   const [selectedDomainId, setSelectedDomainId] = React.useState<string>(value?.domainId ?? '');
   const [selectedClusterId, setSelectedClusterId] = React.useState<string>(value?.clusterId ?? '');
   const [selectedSkillId, setSelectedSkillId] = React.useState<string>(value?.skillId ?? '');
+  const onChangeRef = React.useRef<TaxonomySelectorProps['onChange']>(onChange);
+  const lastEmittedValueRef = React.useRef<TaxonomySelectorValue | null>(null);
 
   const {
     data: subjects = [],
@@ -108,7 +110,11 @@ export function TaxonomySelector({ value, onChange, disabled = false }: Taxonomy
   }, [clusters, selectedClusterId]);
 
   React.useEffect(() => {
-    if (!onChange) {
+    onChangeRef.current = onChange;
+  }, [onChange]);
+
+  React.useEffect(() => {
+    if (!onChangeRef.current) {
       return;
     }
 
@@ -120,8 +126,13 @@ export function TaxonomySelector({ value, onChange, disabled = false }: Taxonomy
       skillId: selectedSkillId || null,
     };
 
-    onChange(buildNextValue(currentValue, {}));
-  }, [onChange, selectedSubjectId, selectedGradeId, selectedDomainId, selectedClusterId, selectedSkillId]);
+    if (lastEmittedValueRef.current && isSameTaxonomyValue(lastEmittedValueRef.current, currentValue)) {
+      return;
+    }
+
+    lastEmittedValueRef.current = currentValue;
+    onChangeRef.current?.(currentValue);
+  }, [selectedSubjectId, selectedGradeId, selectedDomainId, selectedClusterId, selectedSkillId]);
 
   const handleSubjectChange = (nextSubjectId: string) => {
     setSelectedSubjectId(nextSubjectId);
