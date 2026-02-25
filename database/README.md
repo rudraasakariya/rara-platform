@@ -74,6 +74,17 @@ For local development (default postgres user):
 postgresql://postgres:postgres@localhost:5432/rara_platform
 ```
 
+## Curriculum taxonomy seed
+
+Migration `029_seed_math_ela_sel_curriculum.sql` seeds:
+
+- **Services:** Math, ELA, SEL (idempotent; safe to re-run).
+- **Curriculum nodes:** One placeholder grade, domain, cluster, and skill per service for Phase 1.
+
+**Source of standards:** Placeholder structure only. You can replace or extend it later with a standards framework (e.g. [Achieve the Core](https://achievethecore.org/)) by adding data or new migrations.
+
+Run this migration after the curriculum table migrations (025–028).
+
 ## Next Steps
 
 Database migrations will be added systematically through GitHub issues and PRs, starting with the "Database Setup" feature.
