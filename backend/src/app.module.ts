@@ -11,6 +11,7 @@ import { SitesModule } from './sites/sites.module';
 import { SessionsModule } from './sessions/sessions.module';
 import { CurriculumModule } from './curriculum/curriculum.module';
 import { ActionItemsModule } from './action-items/action-items.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ActionItemsModule } from './action-items/action-items.module';
       SessionsModule,
       CurriculumModule,
       ActionItemsModule,
+      ReportsModule,
     ],
   controllers: [AppController],
   providers: [AppService],
