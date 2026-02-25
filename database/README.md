@@ -85,7 +85,14 @@ Migration `029_seed_math_ela_sel_curriculum.sql` seeds:
 
 Run this migration after the curriculum table migrations (025–028).
 
+## Session taxonomy link
+
+Migration `030_add_taxonomy_links_to_sessions.sql` adds optional `cluster_id` and `skill_id`
+references on `sessions` to support curriculum-aligned session reporting.
+
+- `session_topics` remains available for free-form tags.
+- `cluster_id` / `skill_id` is the primary curriculum taxonomy association for a session.
+
 ## Next Steps
 
 Database migrations will be added systematically through GitHub issues and PRs, starting with the "Database Setup" feature.
-
