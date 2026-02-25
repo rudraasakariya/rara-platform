@@ -4,9 +4,13 @@ export interface Student {
   id: string;
   firstName: string;
   lastName: string;
-  email?: string;
+  gender?: string | null;
+  dateOfBirth?: string | null;
+  gradeLevel?: string | null;
+  siteId: string;
   status?: string;
-  siteId?: string;
+  notes?: string | null;
+  caseStatus?: 'active' | 'resolved' | 'needsAD' | 'support';
   createdAt?: string;
   updatedAt?: string;
 }
@@ -30,6 +34,7 @@ export interface UpdateStudentDto {
 export interface SearchStudentsQuery {
   siteId?: string;
   status?: string;
+  caseStatus?: 'active' | 'resolved' | 'needsAD' | 'support';
 }
 
 export const studentsApi = {
@@ -62,4 +67,3 @@ export const studentsApi = {
     await apiClient.delete(`/students/${id}`);
   },
 };
-
