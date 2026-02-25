@@ -31,7 +31,6 @@ export default async function CurriculumDrilldownPage({ params }: CurriculumDril
       </div>
 
       <DrilldownContent subjectId={subjectId} gradeId={gradeId} />
-      <DrilldownContent subjectId={subjectId} gradeId={gradeId} />
     </div>
   );
 }

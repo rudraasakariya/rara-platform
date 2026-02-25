@@ -8,8 +8,8 @@ import { StudentsModule } from './students/students.module';
 import { TutorsModule } from './tutors/tutors.module';
 import { PartnersModule } from './partners/partners.module';
 import { SitesModule } from './sites/sites.module';
-import { CurriculumModule } from './curriculum/curriculum.module';
 import { SessionsModule } from './sessions/sessions.module';
+import { CurriculumModule } from './curriculum/curriculum.module';
 
 @Module({
   imports: [
@@ -22,8 +22,8 @@ import { SessionsModule } from './sessions/sessions.module';
       TutorsModule,
       PartnersModule,
       SitesModule,
-      CurriculumModule,
       SessionsModule,
+      CurriculumModule,
     ],
   controllers: [AppController],
   providers: [AppService],
