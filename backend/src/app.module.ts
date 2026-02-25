@@ -12,6 +12,7 @@ import { SessionsModule } from './sessions/sessions.module';
 import { CurriculumModule } from './curriculum/curriculum.module';
 import { ActionItemsModule } from './action-items/action-items.module';
 import { ReportsModule } from './reports/reports.module';
+import { AvailabilityModule } from './availability/availability.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ReportsModule } from './reports/reports.module';
       CurriculumModule,
       ActionItemsModule,
       ReportsModule,
+      AvailabilityModule,
     ],
   controllers: [AppController],
   providers: [AppService],
