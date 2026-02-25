@@ -43,6 +43,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 \i migrations/028_create_curriculum_skills_table.sql
 \i migrations/029_seed_math_ela_sel_curriculum.sql
 \i migrations/030_add_taxonomy_links_to_sessions.sql
+\i migrations/031_add_case_status_to_students.sql
 
 -- Verify tables were created
 SELECT table_name 
