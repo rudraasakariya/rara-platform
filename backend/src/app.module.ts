@@ -8,6 +8,7 @@ import { StudentsModule } from './students/students.module';
 import { TutorsModule } from './tutors/tutors.module';
 import { PartnersModule } from './partners/partners.module';
 import { SitesModule } from './sites/sites.module';
+import { CurriculumModule } from './curriculum/curriculum.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { SitesModule } from './sites/sites.module';
       TutorsModule,
       PartnersModule,
       SitesModule,
+      CurriculumModule,
     ],
   controllers: [AppController],
   providers: [AppService],
