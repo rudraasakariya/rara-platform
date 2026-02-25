@@ -12,6 +12,15 @@ export class SearchStudentsQueryDto {
   siteId?: string;
 
   @IsOptional()
+  @IsUUID()
+  @ApiProperty({
+    description: 'Filter students by assigned tutor ID (admin/super_admin only)',
+    required: false,
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  tutorId?: string;
+
+  @IsOptional()
   @IsString()
   @ApiProperty({
     description: 'Filter students by status',

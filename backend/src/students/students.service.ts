@@ -102,6 +102,13 @@ export class StudentsService {
         'assignment.tutorId = :tutorId AND assignment.status = :assignmentStatus',
         { tutorId: currentUser.id, assignmentStatus: 'active' }
       );
+    } else if (query?.tutorId) {
+      queryBuilder.innerJoin(
+        'student.tutorAssignments',
+        'assignment',
+        'assignment.tutorId = :tutorId AND assignment.status = :assignmentStatus',
+        { tutorId: query.tutorId, assignmentStatus: 'active' },
+      );
     }
 
     // Filter by siteId (using entity property name)

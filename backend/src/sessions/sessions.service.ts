@@ -115,6 +115,14 @@ export class SessionsService {
       queryBuilder.andWhere('session.skillId = :skillId', { skillId: query.skillId });
     }
 
+    if (query?.studentId) {
+      queryBuilder.innerJoin(
+        'session_students',
+        'sessionStudentFilter',
+        'sessionStudentFilter.session_id = session.id AND sessionStudentFilter.student_id = :studentId',
+        { studentId: query.studentId },
+      );
+    }
     queryBuilder
       .orderBy('session.sessionDate', 'DESC')
       .addOrderBy('session.createdAt', 'DESC');

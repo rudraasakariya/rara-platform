@@ -38,6 +38,7 @@ export class StudentsController {
     description: 'Get all students. Supports optional filtering by siteId and status. Tutors can only see students assigned to them. Name-based search should be handled on the frontend.'
   })
   @ApiQuery({ name: 'siteId', required: false, description: 'Filter students by site ID' })
+  @ApiQuery({ name: 'tutorId', required: false, description: 'Filter students by assigned tutor ID (admin/super_admin only)' })
   @ApiQuery({ name: 'status', required: false, enum: ['active', 'inactive', 'graduated', 'transferred'], description: 'Filter students by status' })
   @ApiQuery({ name: 'caseStatus', required: false, enum: ['active', 'resolved', 'needsAD', 'support'], description: 'Filter students by case/support status' })
   @ApiResponse({ status: 200, description: 'Students fetched successfully' })

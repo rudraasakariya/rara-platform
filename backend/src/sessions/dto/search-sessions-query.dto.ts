@@ -68,4 +68,12 @@ export class SearchSessionsQueryDto {
     required: false,
   })
   skillId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  @ApiProperty({
+    description: 'Filter by student ID assigned to the session.',
+    required: false,
+  })
+  studentId?: string;
 }

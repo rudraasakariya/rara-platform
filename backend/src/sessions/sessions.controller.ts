@@ -63,6 +63,7 @@ export class SessionsController {
   @ApiQuery({ name: 'gradeId', required: false })
   @ApiQuery({ name: 'clusterId', required: false })
   @ApiQuery({ name: 'skillId', required: false })
+  @ApiQuery({ name: 'studentId', required: false })
   @ApiResponse({ status: 200, description: 'Sessions fetched', type: [SessionResponseDto] })
   async getSessions(
     @Query() query: SearchSessionsQueryDto,

@@ -33,6 +33,7 @@ export interface UpdateStudentDto {
 
 export interface SearchStudentsQuery {
   siteId?: string;
+  tutorId?: string;
   status?: string;
   caseStatus?: 'active' | 'resolved' | 'needsAD' | 'support';
 }
