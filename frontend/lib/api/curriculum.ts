@@ -68,4 +68,9 @@ export const curriculumApi = {
     );
     return response.data;
   },
+
+  getDomainsByGradeId: async (gradeId: string): Promise<CurriculumDomain[]> => {
+    const response = await apiClient.get<CurriculumDomain[]>(`/curriculum/grades/${gradeId}/domains`);
+    return response.data;
+  },
 };
