@@ -37,6 +37,7 @@ export interface SearchSessionsQuery {
   gradeId?: string;
   clusterId?: string;
   skillId?: string;
+  studentId?: string;
 }
 
 export interface CreateSessionDto {
