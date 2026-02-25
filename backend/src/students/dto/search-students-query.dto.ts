@@ -20,5 +20,14 @@ export class SearchStudentsQueryDto {
     example: 'active',
   })
   status?: 'active' | 'inactive' | 'graduated' | 'transferred';
-}
 
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    description: 'Filter students by case/support status',
+    enum: ['active', 'resolved', 'needsAD', 'support'],
+    required: false,
+    example: 'active',
+  })
+  caseStatus?: 'active' | 'resolved' | 'needsAD' | 'support';
+}

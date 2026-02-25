@@ -48,6 +48,14 @@ export class Student {
   })
   status: 'active' | 'inactive' | 'graduated' | 'transferred';
 
+  @Column({
+    name: 'case_status',
+    type: 'varchar',
+    length: 50,
+    default: 'active',
+  })
+  caseStatus: 'active' | 'resolved' | 'needsAD' | 'support';
+
   @Column({ type: 'text', nullable: true })
   notes: string;
 
@@ -57,4 +65,3 @@ export class Student {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
-

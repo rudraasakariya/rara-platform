@@ -49,6 +49,14 @@ export class StudentResponseDto {
   notes: string | null;
 
   @Expose()
+  @ApiProperty({
+    description: 'Case/support status of the student',
+    enum: ['active', 'resolved', 'needsAD', 'support'],
+    example: 'active',
+  })
+  caseStatus: 'active' | 'resolved' | 'needsAD' | 'support';
+
+  @Expose()
   @ApiProperty({ description: 'The created at timestamp of the student' })
   createdAt: Date;
 
