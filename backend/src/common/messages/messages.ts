@@ -61,6 +61,9 @@ export const Messages: Record<MessageCode, string> = {
   [MessageCode.DOMAIN_NOT_FOUND]: 'Domain not found',
   [MessageCode.CLUSTER_NOT_FOUND]: 'Cluster not found',
   [MessageCode.SKILL_NOT_FOUND]: 'Skill not found',
+
+  // Action item errors
+  [MessageCode.ACTION_ITEM_NOT_FOUND]: 'Action item not found',
 };
 
 /**
