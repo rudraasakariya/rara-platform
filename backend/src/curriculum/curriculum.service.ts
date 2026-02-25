@@ -27,11 +27,13 @@ export class CurriculumService {
 
   /** GET curriculum/subjects – list subjects (services with curriculum). */
   async getSubjects(): Promise<Service[]> {
-    const services = await this.serviceRepository.find({
-      where: { active: true },
-      order: { name: 'ASC' },
-    });
-    return services;
+    return this.serviceRepository
+      .createQueryBuilder('service')
+      .innerJoin('curriculum_grades', 'grade', 'grade.service_id = service.id')
+      .where('service.active = :active', { active: true })
+      .orderBy('service.name', 'ASC')
+      .distinct(true)
+      .getMany();
   }
 
   /** GET curriculum/subjects/:subjectId/grades – grades for a subject (service). */
@@ -99,13 +101,18 @@ export class CurriculumService {
    * Returns full tree: grade with domains, each domain with clusters, each cluster with skills.
    */
   async getTree(subjectId: string, gradeId: string) {
-    const grade = await this.gradeRepository.findOne({
-      where: { id: gradeId, serviceId: subjectId },
-      relations: ['service'],
-    });
+    const grade = await this.gradeRepository
+      .createQueryBuilder('grade')
+      .innerJoinAndSelect('grade.service', 'service', 'service.active = :active', {
+        active: true,
+      })
+      .where('grade.id = :gradeId', { gradeId })
+      .andWhere('grade.serviceId = :subjectId', { subjectId })
+      .getOne();
+
     if (!grade) {
       const service = await this.serviceRepository.findOne({
-        where: { id: subjectId },
+        where: { id: subjectId, active: true },
       });
       if (!service) {
         throw new NotFoundException(Messages[MessageCode.SUBJECT_NOT_FOUND]);
