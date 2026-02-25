@@ -79,4 +79,14 @@ export class UpdateStudentDto {
     nullable: true
   })
   notes?: string;
+
+  @IsOptional()
+  @IsEnum(['active', 'resolved', 'needsAD', 'support'])
+  @ApiProperty({
+    description: 'Case/support status of the student',
+    enum: ['active', 'resolved', 'needsAD', 'support'],
+    required: false,
+    example: 'active',
+  })
+  caseStatus?: 'active' | 'resolved' | 'needsAD' | 'support';
 }
