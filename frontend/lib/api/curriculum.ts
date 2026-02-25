@@ -35,17 +35,17 @@ export interface CurriculumSkill {
   description: string | null;
 }
 
+export interface CurriculumClusterNode extends CurriculumCluster {
+  skills: CurriculumSkill[];
+}
+
+export interface CurriculumDomainNode extends CurriculumDomain {
+  clusters: CurriculumClusterNode[];
+}
+
 export interface CurriculumTree {
   grade: CurriculumGrade;
-  domains: Array<
-    CurriculumDomain & {
-      clusters: Array<
-        CurriculumCluster & {
-          skills: CurriculumSkill[];
-        }
-      >;
-    }
-  >;
+  domains: CurriculumDomainNode[];
 }
 
 export const curriculumApi = {
