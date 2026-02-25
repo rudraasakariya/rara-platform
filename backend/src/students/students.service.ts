@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
@@ -59,10 +59,14 @@ export class StudentsService {
       excludeExtraneousValues: true,
     });
   }
-  async updateStudent(id: string, updateStudentDto: UpdateStudentDto): Promise<StudentResponseDto> {
+  async updateStudent(id: string, updateStudentDto: UpdateStudentDto, currentUser?: User): Promise<StudentResponseDto> {
     const student = await this.studentRepository.findOne({ where: { id } });
     if (!student) {
       throw new NotFoundException(Messages[MessageCode.STUDENT_NOT_FOUND]);
+    }
+
+    if (updateStudentDto.caseStatus === 'needsAD' && currentUser?.role !== 'super_admin') {
+      throw new ForbiddenException('Only super admins can set caseStatus to needsAD');
     }
 
     // Validate that the site exists if siteId is being updated
@@ -108,6 +112,10 @@ export class StudentsService {
     // Filter by status (using entity property name)
     if (query?.status) {
       queryBuilder.andWhere('student.status = :status', { status: query.status });
+    }
+
+    if (query?.caseStatus) {
+      queryBuilder.andWhere('student.caseStatus = :caseStatus', { caseStatus: query.caseStatus });
     }
 
     const students = await queryBuilder.getMany();

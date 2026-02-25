@@ -39,6 +39,7 @@ export class StudentsController {
   })
   @ApiQuery({ name: 'siteId', required: false, description: 'Filter students by site ID' })
   @ApiQuery({ name: 'status', required: false, enum: ['active', 'inactive', 'graduated', 'transferred'], description: 'Filter students by status' })
+  @ApiQuery({ name: 'caseStatus', required: false, enum: ['active', 'resolved', 'needsAD', 'support'], description: 'Filter students by case/support status' })
   @ApiResponse({ status: 200, description: 'Students fetched successfully' })
   @ApiBearerAuth()
   async getStudents(@Query() query: SearchStudentsQueryDto, @CurrentUser() user: User) {
@@ -84,8 +85,8 @@ export class StudentsController {
     description: Messages[MessageCode.INSUFFICIENT_PERMISSIONS],
   })
   @ApiBearerAuth()
-  async updateStudent(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto) {
-    return this.studentsService.updateStudent(id, updateStudentDto);
+  async updateStudent(@Param('id') id: string, @Body() updateStudentDto: UpdateStudentDto, @CurrentUser() user: User) {
+    return this.studentsService.updateStudent(id, updateStudentDto, user);
   }
 
   @Delete(':id')

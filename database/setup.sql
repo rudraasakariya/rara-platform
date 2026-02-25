@@ -36,10 +36,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 \i migrations/021_create_recommendations_table.sql
 \i migrations/022_create_audit_logs_table.sql
 \i migrations/023_create_notifications_table.sql
+\i migrations/031_add_case_status_to_students.sql
 
 -- Verify tables were created
 SELECT table_name 
 FROM information_schema.tables 
 WHERE table_schema = 'public' 
 ORDER BY table_name;
-
