@@ -14,6 +14,7 @@ import {
   Settings,
   User,
   BookOpenText,
+  BarChart2,
 } from 'lucide-react';
 
 // Navigation items based on role
@@ -23,6 +24,7 @@ const adminNavItems = [
   { value: 'structure', label: 'Structure', href: '/dashboard/structure', icon: Building2 },
   { value: 'sites', label: 'Sites', href: '/sites', icon: Building2 },
   { value: 'partners', label: 'Partners', href: '/partners', icon: Users },
+  { value: 'reports', label: 'Reports', href: '/reports', icon: BarChart2 },
 ];
 
 const tutorNavItems = [
@@ -67,6 +69,7 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
     if (pathname.startsWith('/my-students')) return 'my-students';
     if (pathname.startsWith('/my-sessions')) return 'my-sessions';
     if (pathname.startsWith('/availability')) return 'availability';
+    if (pathname.startsWith('/reports')) return 'reports';
     return 'overview';
   };
 
