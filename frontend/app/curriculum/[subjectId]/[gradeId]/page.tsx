@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getServerUser } from '@/lib/auth-server';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { pageStyles } from '@/styles';
+import { DrilldownContent } from './drilldown-content';
 
 interface CurriculumDrilldownPageProps {
   params: Promise<{
@@ -30,18 +30,8 @@ export default async function CurriculumDrilldownPage({ params }: CurriculumDril
         </div>
       </div>
 
-      <div className="w-full max-w-5xl mx-auto mt-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Loading taxonomy map</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Detailed domain, cluster, and skill navigation is implemented in the taxonomy selector issue.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+      <DrilldownContent subjectId={subjectId} gradeId={gradeId} />
+      <DrilldownContent subjectId={subjectId} gradeId={gradeId} />
     </div>
   );
 }

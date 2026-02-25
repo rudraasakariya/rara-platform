@@ -54,6 +54,13 @@ export const Messages: Record<MessageCode, string> = {
   [MessageCode.PARTNER_NOT_FOUND]: 'Partner not found',
   [MessageCode.PARTNER_ALREADY_EXISTS]: 'Partner already exists',
   [MessageCode.PARTNER_CREATION_FAILED]: 'Failed to create partner',
+
+  // Curriculum errors (read-only API)
+  [MessageCode.SUBJECT_NOT_FOUND]: 'Subject not found',
+  [MessageCode.GRADE_NOT_FOUND]: 'Grade not found',
+  [MessageCode.DOMAIN_NOT_FOUND]: 'Domain not found',
+  [MessageCode.CLUSTER_NOT_FOUND]: 'Cluster not found',
+  [MessageCode.SKILL_NOT_FOUND]: 'Skill not found',
 };
 
 /**
