@@ -6,9 +6,12 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  Index,
 } from 'typeorm';
 import { Tutor } from './tutor.entity';
 import { Site } from './site.entity';
+import { CurriculumCluster } from './curriculum-cluster.entity';
+import { CurriculumSkill } from './curriculum-skill.entity';
 
 @Entity('sessions')
 export class Session {
@@ -28,6 +31,22 @@ export class Session {
   @ManyToOne(() => Site, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'site_id' })
   site: Site;
+
+  @Index('idx_sessions_cluster_id')
+  @Column({ name: 'cluster_id', type: 'uuid', nullable: true })
+  clusterId: string | null;
+
+  @ManyToOne(() => CurriculumCluster, { onDelete: 'RESTRICT', nullable: true })
+  @JoinColumn({ name: 'cluster_id' })
+  cluster: CurriculumCluster | null;
+
+  @Index('idx_sessions_skill_id')
+  @Column({ name: 'skill_id', type: 'uuid', nullable: true })
+  skillId: string | null;
+
+  @ManyToOne(() => CurriculumSkill, { onDelete: 'RESTRICT', nullable: true })
+  @JoinColumn({ name: 'skill_id' })
+  skill: CurriculumSkill | null;
 
   @Column({ name: 'session_date', type: 'date' })
   sessionDate: Date;
@@ -60,4 +79,3 @@ export class Session {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
-
