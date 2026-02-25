@@ -13,11 +13,15 @@ import {
   Calendar,
   Settings,
   User,
+  BookOpenText,
+  BarChart3,
 } from 'lucide-react';
 
 // Navigation items based on role
 const adminNavItems = [
   { value: 'overview', label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
+  { value: 'curriculum', label: 'Curriculum', href: '/curriculum', icon: BookOpenText },
+  { value: 'reports', label: 'Reports', href: '/reports', icon: BarChart3 },
   { value: 'structure', label: 'Structure', href: '/dashboard/structure', icon: Building2 },
   { value: 'sites', label: 'Sites', href: '/sites', icon: Building2 },
   { value: 'partners', label: 'Partners', href: '/partners', icon: Users },
@@ -25,6 +29,7 @@ const adminNavItems = [
 
 const tutorNavItems = [
   { value: 'overview', label: 'Overview', href: '/dashboard', icon: LayoutDashboard },
+  { value: 'curriculum', label: 'Curriculum', href: '/curriculum', icon: BookOpenText },
   { value: 'my-students', label: 'My Students', href: '/my-students', icon: Users },
   { value: 'my-sessions', label: 'My Sessions', href: '/my-sessions', icon: Calendar },
   { value: 'availability', label: 'Availability', href: '/availability', icon: Calendar },
@@ -60,6 +65,8 @@ export function SidebarContent({ onNavigate }: SidebarContentProps) {
     }
     if (pathname.startsWith('/sites')) return 'sites';
     if (pathname.startsWith('/partners')) return 'partners';
+    if (pathname.startsWith('/curriculum')) return 'curriculum';
+    if (pathname.startsWith('/reports')) return 'reports';
     if (pathname.startsWith('/my-students')) return 'my-students';
     if (pathname.startsWith('/my-sessions')) return 'my-sessions';
     if (pathname.startsWith('/availability')) return 'availability';

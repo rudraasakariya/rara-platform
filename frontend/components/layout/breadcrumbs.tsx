@@ -17,6 +17,8 @@ const routeLabels: Record<string, string> = {
   structure: 'Structure',
   sites: 'Sites',
   partners: 'Partners',
+  curriculum: 'Curriculum',
+  reports: 'Reports',
   'my-students': 'My Students',
   'my-sessions': 'My Sessions',
   availability: 'Availability',
