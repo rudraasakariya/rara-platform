@@ -40,6 +40,23 @@ export interface SearchSessionsQuery {
   studentId?: string;
 }
 
+export interface CreateSessionDto {
+  tutorId?: string;
+  siteId: string;
+  studentIds: string[];
+  clusterId?: string;
+  skillId?: string;
+  sessionDate: string;
+  scheduledStartTime?: string;
+  actualStartTime?: string;
+  actualEndTime?: string;
+  status?: SessionStatus;
+  minutes?: number;
+  notes?: string;
+}
+
+export interface UpdateSessionDto extends Partial<CreateSessionDto> {}
+
 export const sessionsApi = {
   getAll: async (query?: SearchSessionsQuery): Promise<Session[]> => {
     const response = await apiClient.get<Session[]>('/sessions', { params: query });
@@ -48,6 +65,35 @@ export const sessionsApi = {
 
   getById: async (id: string): Promise<Session> => {
     const response = await apiClient.get<Session>(`/sessions/${id}`);
+    return response.data;
+  },
+
+  create: async (data: CreateSessionDto): Promise<Session> => {
+    const response = await apiClient.post<Session>('/sessions', data);
+    return response.data;
+  },
+
+  update: async (id: string, data: UpdateSessionDto): Promise<Session> => {
+    const response = await apiClient.patch<Session>(`/sessions/${id}`, data);
+    return response.data;
+  },
+
+  delete: async (id: string): Promise<void> => {
+    await apiClient.delete(`/sessions/${id}`);
+  },
+
+  getSessionStudents: async (sessionId: string): Promise<any[]> => {
+    const response = await apiClient.get<any[]>(`/sessions/${sessionId}/students`);
+    return response.data;
+  },
+
+  addStudentToSession: async (sessionId: string, studentId: string): Promise<any[]> => {
+    const response = await apiClient.post<any[]>(`/sessions/${sessionId}/students/${studentId}`);
+    return response.data;
+  },
+
+  removeStudentFromSession: async (sessionId: string, studentId: string): Promise<any[]> => {
+    const response = await apiClient.delete<any[]>(`/sessions/${sessionId}/students/${studentId}`);
     return response.data;
   },
 };

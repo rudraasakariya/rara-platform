@@ -123,7 +123,6 @@ export class SessionsService {
         { studentId: query.studentId },
       );
     }
-
     queryBuilder
       .orderBy('session.sessionDate', 'DESC')
       .addOrderBy('session.createdAt', 'DESC');
